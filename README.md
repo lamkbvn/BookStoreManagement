@@ -1,4 +1,4 @@
-# WebBanHang – ASP.NET Core + Entity Framework Core + MySQL
+# WebBanHang – ASP.NET Core
 
 ## 📦 Môi trường sử dụng
 
@@ -81,11 +81,12 @@ dotnet ef database update
 ## 📁 Các lệnh thường dùng
 
 ```bash
-dotnet restore                 # Restore NuGet packages
-dotnet build                   # Build project
-dotnet ef migrations list      # Xem danh sách migration
-dotnet ef database update      # Update database
-dotnet ef migrations remove   # Xóa migration cuối (chưa apply DB)
+dotnet restore                                               # Restore NuGet packages
+dotnet build                                                 # Build project
+dotnet ef migrations add <MigrationName>                     # Tạo migration
+dotnet ef migrations list                                    # Xem danh sách migration
+dotnet ef database update                                    # Update database
+dotnet ef migrations remove                                  # Xóa migration cuối (chưa apply DB)
 ```
 
 ---
