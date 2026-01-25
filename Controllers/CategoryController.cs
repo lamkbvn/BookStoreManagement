@@ -1,17 +1,25 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using WebBanHang.Common.Extensions;
+using WebBanHang.Features.CategoryFeatures.Commands.CreateCategory;
 
-namespace WebBanHang.Controllers
+namespace WebBanHang.Controllers;
+
+[ApiController]
+[Route("api/categories")]
+public class CategoryController : ControllerBase
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class CategoryController : ControllerBase
-    {
-        public CategoryController() { }
+    private readonly IMediator _mediator;
 
-        [HttpGet]
-        public string GetALl()
-        {
-            return "Hello world";
-        }
+    public CategoryController(IMediator mediator)
+    {
+        _mediator = mediator;
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Create(CreateCategoryCommand command)
+    {
+        var result = await _mediator.Send(command);
+        return this.AutoResponse(result);
     }
 }
