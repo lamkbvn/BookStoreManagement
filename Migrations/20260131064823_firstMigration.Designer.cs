@@ -12,8 +12,8 @@ using WebBanHang.DbContextConfig;
 namespace WebBanHang.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260125042912_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260131064823_firstMigration")]
+    partial class firstMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -140,62 +140,92 @@ namespace WebBanHang.Migrations
                         new
                         {
                             Id = 1,
+                            Address = "Quận 1, TP. Hồ Chí Minh",
                             CreateAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Nguyễn Văn A"
+                            Email = "nguyenvana@gmail.com",
+                            Name = "Nguyễn Văn A",
+                            Phone = "0901000001"
                         },
                         new
                         {
                             Id = 2,
+                            Address = "Quận 3, TP. Hồ Chí Minh",
                             CreateAt = new DateTime(2025, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Trần Thị B"
+                            Email = "tranthib@gmail.com",
+                            Name = "Trần Thị B",
+                            Phone = "0901000002"
                         },
                         new
                         {
                             Id = 3,
+                            Address = "Quận 5, TP. Hồ Chí Minh",
                             CreateAt = new DateTime(2025, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Lê Văn C"
+                            Email = "levanc@gmail.com",
+                            Name = "Lê Văn C",
+                            Phone = "0901000003"
                         },
                         new
                         {
                             Id = 4,
+                            Address = "Quận 7, TP. Hồ Chí Minh",
                             CreateAt = new DateTime(2025, 1, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Phạm Thị D"
+                            Email = "phamthid@gmail.com",
+                            Name = "Phạm Thị D",
+                            Phone = "0901000004"
                         },
                         new
                         {
                             Id = 5,
+                            Address = "Quận Bình Thạnh, TP. Hồ Chí Minh",
                             CreateAt = new DateTime(2025, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Hoàng Văn E"
+                            Email = "hoangvane@gmail.com",
+                            Name = "Hoàng Văn E",
+                            Phone = "0901000005"
                         },
                         new
                         {
                             Id = 6,
+                            Address = "Quận Gò Vấp, TP. Hồ Chí Minh",
                             CreateAt = new DateTime(2025, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Đỗ Thị F"
+                            Email = "dothif@gmail.com",
+                            Name = "Đỗ Thị F",
+                            Phone = "0901000006"
                         },
                         new
                         {
                             Id = 7,
+                            Address = "Quận Tân Bình, TP. Hồ Chí Minh",
                             CreateAt = new DateTime(2025, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Vũ Văn G"
+                            Email = "vuvang@gmail.com",
+                            Name = "Vũ Văn G",
+                            Phone = "0901000007"
                         },
                         new
                         {
                             Id = 8,
+                            Address = "Quận Thủ Đức, TP. Hồ Chí Minh",
                             CreateAt = new DateTime(2025, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Bùi Thị H"
+                            Email = "buithih@gmail.com",
+                            Name = "Bùi Thị H",
+                            Phone = "0901000008"
                         },
                         new
                         {
                             Id = 9,
+                            Address = "Quận 12, TP. Hồ Chí Minh",
                             CreateAt = new DateTime(2025, 1, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Phan Văn I"
+                            Email = "phanvani@gmail.com",
+                            Name = "Phan Văn I",
+                            Phone = "0901000009"
                         },
                         new
                         {
                             Id = 10,
+                            Address = "Huyện Bình Chánh, TP. Hồ Chí Minh",
                             CreateAt = new DateTime(2025, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Đặng Thị K"
+                            Email = "dangthik@gmail.com",
+                            Name = "Đặng Thị K",
+                            Phone = "0901000010"
                         });
                 });
 
@@ -297,9 +327,6 @@ namespace WebBanHang.Migrations
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int?>("PromotionId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
@@ -309,8 +336,6 @@ namespace WebBanHang.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerId");
-
-                    b.HasIndex("PromotionId");
 
                     b.HasIndex("UserId");
 
@@ -322,7 +347,6 @@ namespace WebBanHang.Migrations
                             Id = 1,
                             CustomerId = 1,
                             OrderDate = new DateTime(2025, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PromotionId = 1,
                             Status = 1,
                             UserId = 1
                         },
@@ -331,7 +355,6 @@ namespace WebBanHang.Migrations
                             Id = 2,
                             CustomerId = 2,
                             OrderDate = new DateTime(2025, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PromotionId = 2,
                             Status = 1,
                             UserId = 2
                         },
@@ -348,18 +371,16 @@ namespace WebBanHang.Migrations
                             Id = 4,
                             CustomerId = 4,
                             OrderDate = new DateTime(2025, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PromotionId = 3,
                             Status = 2,
-                            UserId = 4
+                            UserId = 1
                         },
                         new
                         {
                             Id = 5,
                             CustomerId = 5,
                             OrderDate = new DateTime(2025, 1, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PromotionId = 4,
                             Status = 1,
-                            UserId = 5
+                            UserId = 2
                         },
                         new
                         {
@@ -367,25 +388,23 @@ namespace WebBanHang.Migrations
                             CustomerId = 6,
                             OrderDate = new DateTime(2025, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
-                            UserId = 6
+                            UserId = 3
                         },
                         new
                         {
                             Id = 7,
                             CustomerId = 7,
                             OrderDate = new DateTime(2025, 1, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PromotionId = 5,
                             Status = 1,
-                            UserId = 7
+                            UserId = 1
                         },
                         new
                         {
                             Id = 8,
                             CustomerId = 8,
                             OrderDate = new DateTime(2025, 1, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PromotionId = 6,
                             Status = 1,
-                            UserId = 8
+                            UserId = 2
                         },
                         new
                         {
@@ -393,16 +412,15 @@ namespace WebBanHang.Migrations
                             CustomerId = 9,
                             OrderDate = new DateTime(2025, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
-                            UserId = 9
+                            UserId = 3
                         },
                         new
                         {
                             Id = 10,
                             CustomerId = 10,
                             OrderDate = new DateTime(2025, 1, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PromotionId = 7,
                             Status = 1,
-                            UserId = 10
+                            UserId = 1
                         });
                 });
 
@@ -629,114 +647,6 @@ namespace WebBanHang.Migrations
                         });
                 });
 
-            modelBuilder.Entity("WebBanHang.Entity.Promotion", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<decimal>("DiscountPercent")
-                        .HasColumnType("decimal(65,30)");
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Promotions");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Code = "SALE10",
-                            DiscountPercent = 10m,
-                            EndDate = new DateTime(2025, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StartDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Code = "SALE15",
-                            DiscountPercent = 15m,
-                            EndDate = new DateTime(2025, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StartDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Code = "SALE20",
-                            DiscountPercent = 20m,
-                            EndDate = new DateTime(2025, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StartDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Code = "BOOK5",
-                            DiscountPercent = 5m,
-                            EndDate = new DateTime(2025, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StartDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Code = "BOOK7",
-                            DiscountPercent = 7m,
-                            EndDate = new DateTime(2025, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StartDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Code = "BOOK12",
-                            DiscountPercent = 12m,
-                            EndDate = new DateTime(2025, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StartDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Code = "VIP20",
-                            DiscountPercent = 20m,
-                            EndDate = new DateTime(2025, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StartDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Code = "VIP25",
-                            DiscountPercent = 25m,
-                            EndDate = new DateTime(2025, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StartDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Code = "TET30",
-                            DiscountPercent = 30m,
-                            EndDate = new DateTime(2025, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StartDate = new DateTime(2025, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Code = "SUMMER15",
-                            DiscountPercent = 15m,
-                            EndDate = new DateTime(2025, 8, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StartDate = new DateTime(2025, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        });
-                });
-
             modelBuilder.Entity("WebBanHang.Entity.Supplier", b =>
                 {
                     b.Property<int>("Id")
@@ -862,69 +772,6 @@ namespace WebBanHang.Migrations
                             Password = "123456",
                             Role = 1,
                             Username = "staff2"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CustomerId = 1,
-                            Fullname = "Khách 1",
-                            Password = "123456",
-                            Role = 2,
-                            Username = "cus1"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CustomerId = 2,
-                            Fullname = "Khách 2",
-                            Password = "123456",
-                            Role = 2,
-                            Username = "cus2"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CustomerId = 3,
-                            Fullname = "Khách 3",
-                            Password = "123456",
-                            Role = 2,
-                            Username = "cus3"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            CustomerId = 4,
-                            Fullname = "Khách 4",
-                            Password = "123456",
-                            Role = 2,
-                            Username = "cus4"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            CustomerId = 5,
-                            Fullname = "Khách 5",
-                            Password = "123456",
-                            Role = 2,
-                            Username = "cus5"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            CustomerId = 6,
-                            Fullname = "Khách 6",
-                            Password = "123456",
-                            Role = 2,
-                            Username = "cus6"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            CustomerId = 7,
-                            Fullname = "Khách 7",
-                            Password = "123456",
-                            Role = 2,
-                            Username = "cus7"
                         });
                 });
 
@@ -947,10 +794,6 @@ namespace WebBanHang.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WebBanHang.Entity.Promotion", "Promotion")
-                        .WithMany()
-                        .HasForeignKey("PromotionId");
-
                     b.HasOne("WebBanHang.Entity.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
@@ -958,8 +801,6 @@ namespace WebBanHang.Migrations
                         .IsRequired();
 
                     b.Navigation("Customer");
-
-                    b.Navigation("Promotion");
 
                     b.Navigation("User");
                 });

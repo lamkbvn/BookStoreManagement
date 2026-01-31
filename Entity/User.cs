@@ -10,10 +10,6 @@ namespace WebBanHang.Entity
         public required string Fullname { get; set; }
         public required string Username { get; set; }
         public required string Password { get; set; }
-
-        public int? CustomerId { get; set; }
-        public Customer? Customer { get; set; }
-
         public Role Role { get; set; } = Role.Admin;
     }
 }

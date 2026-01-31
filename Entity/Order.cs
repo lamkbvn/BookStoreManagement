@@ -13,9 +13,6 @@ namespace WebBanHang.Entity
         public int CustomerId { get; set; }
         public Customer Customer { get; set; } = null!;
 
-        public int? PromotionId { get; set; }
-        public Promotion? Promotion { get; set; }
-
         public int UserId { get; set; }
 
         public User User { get; set; } = null!;
