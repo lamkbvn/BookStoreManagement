@@ -87,6 +87,7 @@ dotnet ef migrations add <MigrationName>                     # Tạo migration
 dotnet ef migrations list                                    # Xem danh sách migration
 dotnet ef database update                                    # Update database
 dotnet ef migrations remove                                  # Xóa migration cuối (chưa apply DB)
+dotnet ef database drop --force                              # Xoá database
 ```
 
 ---
