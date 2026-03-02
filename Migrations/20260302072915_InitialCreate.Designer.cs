@@ -12,8 +12,8 @@ using WebBanHang.DbContextConfig;
 namespace WebBanHang.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260131064823_firstMigration")]
-    partial class firstMigration
+    [Migration("20260302072915_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -724,9 +724,6 @@ namespace WebBanHang.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CustomerId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Fullname")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -744,8 +741,6 @@ namespace WebBanHang.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId");
-
                     b.ToTable("Users");
 
                     b.HasData(
@@ -753,7 +748,7 @@ namespace WebBanHang.Migrations
                         {
                             Id = 1,
                             Fullname = "Admin System",
-                            Password = "123456",
+                            Password = "AQAAAAIAAYagAAAAEKQqWutR/PQhPVCCvyhLoEw4GXCaiprDv6Whw0MjX8ZYaitWRKXbPVyXFfV7ubG6tw==",
                             Role = 0,
                             Username = "admin"
                         },
@@ -761,7 +756,7 @@ namespace WebBanHang.Migrations
                         {
                             Id = 2,
                             Fullname = "Nhân viên 1",
-                            Password = "123456",
+                            Password = "AQAAAAIAAYagAAAAEP2tZCqkvbYVe/rI8ttfDynzQcq2ecz/Fl2IcrKVhPkeutGtdj/3LFGz8H3QSylpXw==",
                             Role = 1,
                             Username = "staff1"
                         },
@@ -769,7 +764,7 @@ namespace WebBanHang.Migrations
                         {
                             Id = 3,
                             Fullname = "Nhân viên 2",
-                            Password = "123456",
+                            Password = "AQAAAAIAAYagAAAAEM5ugcU8qqAO8wO3QKaVgF7sbWHCkAzitS2QUv4Hxsa74Jp/yMUYOHOleRM2eYqNng==",
                             Role = 1,
                             Username = "staff2"
                         });
@@ -841,15 +836,6 @@ namespace WebBanHang.Migrations
                     b.Navigation("Category");
 
                     b.Navigation("Supplier");
-                });
-
-            modelBuilder.Entity("WebBanHang.Entity.User", b =>
-                {
-                    b.HasOne("WebBanHang.Entity.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId");
-
-                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("WebBanHang.Entity.Category", b =>

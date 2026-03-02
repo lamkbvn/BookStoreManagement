@@ -6,5 +6,7 @@ namespace WebBanHang.Repository.Interface
     {
         Task<User?> FindByUsernameAsync(string username);
         Task<bool> ExistsByUsernameAsync(string username);
+
+        Task<User> AddAsync(User user);
     }
 }

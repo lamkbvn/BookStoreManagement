@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WebBanHang.Migrations
 {
     /// <inheritdoc />
-    public partial class firstMigration : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -83,17 +83,11 @@ namespace WebBanHang.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Password = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CustomerId = table.Column<int>(type: "int", nullable: true),
                     Role = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Users_Customers_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Customers",
-                        principalColumn: "Id");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -259,12 +253,12 @@ namespace WebBanHang.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "CustomerId", "Fullname", "Password", "Role", "Username" },
+                columns: new[] { "Id", "Fullname", "Password", "Role", "Username" },
                 values: new object[,]
                 {
-                    { 1, null, "Admin System", "123456", 0, "admin" },
-                    { 2, null, "Nhân viên 1", "123456", 1, "staff1" },
-                    { 3, null, "Nhân viên 2", "123456", 1, "staff2" }
+                    { 1, "Admin System", "AQAAAAIAAYagAAAAEKQqWutR/PQhPVCCvyhLoEw4GXCaiprDv6Whw0MjX8ZYaitWRKXbPVyXFfV7ubG6tw==", 0, "admin" },
+                    { 2, "Nhân viên 1", "AQAAAAIAAYagAAAAEP2tZCqkvbYVe/rI8ttfDynzQcq2ecz/Fl2IcrKVhPkeutGtdj/3LFGz8H3QSylpXw==", 1, "staff1" },
+                    { 3, "Nhân viên 2", "AQAAAAIAAYagAAAAEM5ugcU8qqAO8wO3QKaVgF7sbWHCkAzitS2QUv4Hxsa74Jp/yMUYOHOleRM2eYqNng==", 1, "staff2" }
                 });
 
             migrationBuilder.InsertData(
@@ -370,11 +364,6 @@ namespace WebBanHang.Migrations
                 name: "IX_Products_SupplierId",
                 table: "Products",
                 column: "SupplierId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Users_CustomerId",
-                table: "Users",
-                column: "CustomerId");
         }
 
         /// <inheritdoc />
@@ -393,6 +382,9 @@ namespace WebBanHang.Migrations
                 name: "Products");
 
             migrationBuilder.DropTable(
+                name: "Customers");
+
+            migrationBuilder.DropTable(
                 name: "Users");
 
             migrationBuilder.DropTable(
@@ -400,9 +392,6 @@ namespace WebBanHang.Migrations
 
             migrationBuilder.DropTable(
                 name: "Suppliers");
-
-            migrationBuilder.DropTable(
-                name: "Customers");
         }
     }
 }

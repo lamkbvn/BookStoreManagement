@@ -23,5 +23,12 @@ namespace WebBanHang.Repository.Implement
         {
             return await _context.Users.AnyAsync(u => u.Username == username);
         }
+
+        public async Task<User> AddAsync(User user)
+        {
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+            return user;
+        }
     }
 }

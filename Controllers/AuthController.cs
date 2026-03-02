@@ -17,7 +17,7 @@ namespace WebBanHang.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost]
+        [HttpPost("login")]
         public async Task<IActionResult> Login(LoginCommand loginCommand)
         {
             var result = await _mediator.Send(loginCommand);

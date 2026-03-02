@@ -2,12 +2,15 @@
 
 using global::WebBanHang.Entity;
 using global::WebBanHang.Enum;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 public static class DbSeed
 {
     public static void Seed(ModelBuilder modelBuilder)
     {
+
+        var passwordHasher = new PasswordHasher<User>();
         // ===== CATEGORY =====
         modelBuilder.Entity<Category>().HasData(
             new Category { Id = 1, Name = "Tiểu thuyết" },
@@ -160,11 +163,38 @@ public static class DbSeed
 
 
         // ===== USER =====
-        modelBuilder.Entity<User>().HasData(
-            new User { Id = 1, Fullname = "Admin System", Username = "admin", Password = "123456", Role = Role.Admin },
-            new User { Id = 2, Fullname = "Nhân viên 1", Username = "staff1", Password = "123456", Role = Role.Staff },
-            new User { Id = 3, Fullname = "Nhân viên 2", Username = "staff2", Password = "123456", Role = Role.Staff }
-        );
+
+        var admin = new User
+        {
+            Id = 1,
+            Fullname = "Admin System",
+            Username = "admin01",
+            Role = Role.Admin,
+            Password = "password",
+        };
+        admin.Password = passwordHasher.HashPassword(admin, "123456");
+
+        var staff1 = new User
+        {
+            Id = 2,
+            Fullname = "Nhân viên 1",
+            Username = "staff01",
+            Role = Role.Staff,
+            Password = "password",
+        };
+        staff1.Password = passwordHasher.HashPassword(staff1, "123456");
+
+        var staff2 = new User
+        {
+            Id = 3,
+            Fullname = "Nhân viên 2",
+            Username = "staff02",
+            Role = Role.Staff,
+            Password = "password"
+        };
+        staff2.Password = passwordHasher.HashPassword(staff2, "123456");
+
+        modelBuilder.Entity<User>().HasData(admin, staff1, staff2);
 
         // ===== ORDER =====
         modelBuilder.Entity<Order>().HasData(
