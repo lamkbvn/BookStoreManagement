@@ -1,4 +1,4 @@
-﻿using MediatR;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using WebBanHang.Common.Extensions;
 using WebBanHang.Features.AuthFeatures.Queries.Login;
