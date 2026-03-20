@@ -1,0 +1,39 @@
+using AutoMapper;
+using MediatR;
+using WebBanHang.Enum;
+using WebBanHang.Repository.Interface;
+
+namespace WebBanHang.Features.OrderFeatures.Commands.UpdateOrder
+{
+    public class UpdateOrderHandler
+        : IRequestHandler<UpdateOrderCommand, UpdateOrderResult>
+    {
+        private readonly IOrderRepository _orderRepository;
+        private readonly IMapper _mapper;
+
+        public UpdateOrderHandler(
+            IOrderRepository orderRepository,
+            IMapper mapper)
+        {
+            _orderRepository = orderRepository;
+            _mapper = mapper;
+        }
+
+        public async Task<UpdateOrderResult> Handle(
+            UpdateOrderCommand request,
+            CancellationToken cancellationToken)
+        {
+            var order = await _orderRepository.GetByIdAsync(request.Id);
+            if (order == null)
+                throw new InvalidOperationException($"Order with id {request.Id} not found");
+
+            if (System.Enum.TryParse<OrderStatus>(request.Status, out var status))
+            {
+                order.Status = status;
+            }
+
+            var updatedOrder = await _orderRepository.UpdateAsync(order);
+            return _mapper.Map<UpdateOrderResult>(updatedOrder);
+        }
+    }
+}
