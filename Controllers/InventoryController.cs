@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebBanHang.Common.Extensions;
 using WebBanHang.Features.InventoryFeatures.Commands.CreateInventory;
+using WebBanHang.Features.InventoryFeatures.Commands.DecreaseInventory;
 using WebBanHang.Features.InventoryFeatures.Commands.DeleteInventory;
+using WebBanHang.Features.InventoryFeatures.Commands.IncreaseInventory;
 using WebBanHang.Features.InventoryFeatures.Commands.UpdateInventory;
 using WebBanHang.Features.InventoryFeatures.Queries.GetInventories;
 using WebBanHang.Features.InventoryFeatures.Queries.GetInventoryById;
@@ -45,6 +47,22 @@ public class InventoryController : ControllerBase
 
     [HttpPut("{id:int}")]
     public async Task<IActionResult> Update(int id, UpdateInventoryCommand command)
+    {
+        command.Id = id;
+        var result = await _mediator.Send(command);
+        return this.AutoResponse(result);
+    }
+
+    [HttpPatch("{id:int}/increase")]
+    public async Task<IActionResult> Increase(int id, IncreaseInventoryCommand command)
+    {
+        command.Id = id;
+        var result = await _mediator.Send(command);
+        return this.AutoResponse(result);
+    }
+
+    [HttpPatch("{id:int}/decrease")]
+    public async Task<IActionResult> Decrease(int id, DecreaseInventoryCommand command)
     {
         command.Id = id;
         var result = await _mediator.Send(command);
