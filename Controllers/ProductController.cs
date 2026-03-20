@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebBanHang.Common.Extensions;
+using WebBanHang.Features.InventoryFeatures.Queries.GetInventoryByProductId;
 using WebBanHang.Features.ProductFeatures.Commands.CreateProduct;
 using WebBanHang.Features.ProductFeatures.Commands.DeleteProduct;
 using WebBanHang.Features.ProductFeatures.Commands.UpdateProduct;
@@ -33,6 +34,13 @@ namespace WebBanHang.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var result = await _mediator.Send(new GetProductByIdQuery { Id = id });
+            return this.AutoResponse(result);
+        }
+
+        [HttpGet("{id:int}/inventory")]
+        public async Task<IActionResult> GetInventoryByProductId(int id)
+        {
+            var result = await _mediator.Send(new GetInventoryByProductIdQuery { ProductId = id });
             return this.AutoResponse(result);
         }
 
