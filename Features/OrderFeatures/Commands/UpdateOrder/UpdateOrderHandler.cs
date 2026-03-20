@@ -36,7 +36,9 @@ namespace WebBanHang.Features.OrderFeatures.Commands.UpdateOrder
             var totalPrice = order.OrderItems.Sum(oi => oi.Quantity * oi.UnitPrice);
             if (order.Promotion != null)
             {
-                order.DiscountAmount = totalPrice * (order.Promotion.DiscountPercentage / 100);
+                var calculatedDiscount = totalPrice * (order.Promotion.DiscountPercentage / 100);
+                // Apply maximum discount limit
+                order.DiscountAmount = Math.Min(calculatedDiscount, order.Promotion.MaximumDiscountAmount);
                 order.FinalPrice = totalPrice - order.DiscountAmount;
             }
             else

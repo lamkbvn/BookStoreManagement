@@ -1,10 +1,9 @@
-using System.ComponentModel.DataAnnotations;
+using MediatR;
 
-namespace WebBanHang.Entity
+namespace WebBanHang.Features.PromotionFeatures.Commands.UpdatePromotion
 {
-    public class Promotion
+    public class UpdatePromotionCommand : IRequest<UpdatePromotionResult>
     {
-        [Key]
         public int Id { get; set; }
         public required string Code { get; set; }
         public string? Description { get; set; }
@@ -12,8 +11,6 @@ namespace WebBanHang.Entity
         public decimal MaximumDiscountAmount { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public bool IsActive { get; set; } = true;
-
-        public ICollection<Order> Orders { get; set; } = new List<Order>();
+        public bool IsActive { get; set; }
     }
 }

@@ -54,7 +54,9 @@ namespace WebBanHang.Features.OrderFeatures.Commands.CreateOrder
                 var promotion = await _orderRepository.GetPromotionByIdAsync(request.PromotionId.Value);
                 if (promotion != null)
                 {
-                    order.DiscountAmount = totalPrice * (promotion.DiscountPercentage / 100);
+                    var calculatedDiscount = totalPrice * (promotion.DiscountPercentage / 100);
+                    // Apply maximum discount limit
+                    order.DiscountAmount = Math.Min(calculatedDiscount, promotion.MaximumDiscountAmount);
                     order.FinalPrice = totalPrice - order.DiscountAmount;
                 }
                 else

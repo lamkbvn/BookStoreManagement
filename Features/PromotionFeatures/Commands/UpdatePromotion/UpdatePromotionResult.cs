@@ -1,19 +1,14 @@
-using System.ComponentModel.DataAnnotations;
-
-namespace WebBanHang.Entity
+namespace WebBanHang.Features.PromotionFeatures.Commands.UpdatePromotion
 {
-    public class Promotion
+    public class UpdatePromotionResult
     {
-        [Key]
         public int Id { get; set; }
-        public required string Code { get; set; }
+        public string Code { get; set; } = string.Empty;
         public string? Description { get; set; }
         public decimal DiscountPercentage { get; set; }
         public decimal MaximumDiscountAmount { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public bool IsActive { get; set; } = true;
-
-        public ICollection<Order> Orders { get; set; } = new List<Order>();
+        public bool IsActive { get; set; }
     }
 }
