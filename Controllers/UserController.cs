@@ -8,7 +8,7 @@ namespace WebBanHang.Controllers
 {
     [ApiController]
     [Route("api/user")]
-    // [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class UserController : ControllerBase
     {
         private readonly IMediator _mediator;
