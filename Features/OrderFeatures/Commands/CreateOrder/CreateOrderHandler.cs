@@ -28,6 +28,7 @@ namespace WebBanHang.Features.OrderFeatures.Commands.CreateOrder
             {
                 CustomerId = request.CustomerId,
                 UserId = request.UserId,
+                PromotionId = request.PromotionId,
                 Status = OrderStatus.Pending,
                 OrderDate = DateTime.Now,
                 OrderItems = new List<OrderItem>()

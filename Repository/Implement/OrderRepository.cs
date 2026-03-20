@@ -27,6 +27,7 @@ namespace WebBanHang.Repository.Implement
                 .AsNoTracking()
                 .Include(o => o.Customer)
                 .Include(o => o.User)
+                .Include(o => o.Promotion)
                 .Include(o => o.OrderItems)
                     .ThenInclude(oi => oi.Product)
                 .OrderByDescending(o => o.Id)
@@ -39,6 +40,7 @@ namespace WebBanHang.Repository.Implement
                 .AsNoTracking()
                 .Include(o => o.Customer)
                 .Include(o => o.User)
+                .Include(o => o.Promotion)
                 .Include(o => o.OrderItems)
                     .ThenInclude(oi => oi.Product)
                 .FirstOrDefaultAsync(o => o.Id == id);

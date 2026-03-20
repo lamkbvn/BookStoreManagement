@@ -14,8 +14,10 @@ namespace WebBanHang.Entity
         public Customer Customer { get; set; } = null!;
 
         public int UserId { get; set; }
-
         public User User { get; set; } = null!;
+
+        public int? PromotionId { get; set; }
+        public Promotion? Promotion { get; set; }
 
         public ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 
