@@ -32,6 +32,19 @@ namespace WebBanHang.Features.OrderFeatures.Commands.UpdateOrder
                 order.Status = status;
             }
 
+            // Calculate discount and final price before updating
+            var totalPrice = order.OrderItems.Sum(oi => oi.Quantity * oi.UnitPrice);
+            if (order.Promotion != null)
+            {
+                order.DiscountAmount = totalPrice * (order.Promotion.DiscountPercentage / 100);
+                order.FinalPrice = totalPrice - order.DiscountAmount;
+            }
+            else
+            {
+                order.DiscountAmount = 0;
+                order.FinalPrice = totalPrice;
+            }
+
             var updatedOrder = await _orderRepository.UpdateAsync(order);
             return _mapper.Map<UpdateOrderResult>(updatedOrder);
         }

@@ -20,6 +20,8 @@ namespace WebBanHang.Features.OrderFeatures.Queries.GetOrderById
         public string Status { get; set; } = string.Empty;
         public string? PromotionCode { get; set; }
         public decimal TotalPrice { get; set; }
+        public decimal DiscountAmount { get; set; }
+        public decimal FinalPrice { get; set; }
         public List<OrderItemDto> OrderItems { get; set; } = new();
     }
 }

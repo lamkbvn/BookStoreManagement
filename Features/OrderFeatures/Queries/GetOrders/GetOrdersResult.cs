@@ -10,5 +10,7 @@ namespace WebBanHang.Features.OrderFeatures.Queries.GetOrders
         public string? PromotionCode { get; set; }
         public int ItemCount { get; set; }
         public decimal TotalPrice { get; set; }
+        public decimal DiscountAmount { get; set; }
+        public decimal FinalPrice { get; set; }
     }
 }

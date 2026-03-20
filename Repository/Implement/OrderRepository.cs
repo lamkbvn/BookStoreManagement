@@ -63,5 +63,10 @@ namespace WebBanHang.Repository.Implement
             _context.Orders.Remove(order);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<Promotion?> GetPromotionByIdAsync(int promotionId)
+        {
+            return await _context.Promotions.FirstOrDefaultAsync(p => p.Id == promotionId);
+        }
     }
 }

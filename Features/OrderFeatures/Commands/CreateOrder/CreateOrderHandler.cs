@@ -44,8 +44,36 @@ namespace WebBanHang.Features.OrderFeatures.Commands.CreateOrder
                 });
             }
 
+            // Calculate total price
+            var totalPrice = order.OrderItems.Sum(oi => oi.Quantity * oi.UnitPrice);
+            
+            // Calculate discount before saving to database
+            if (request.PromotionId.HasValue)
+            {
+                // Get promotion details to calculate discount
+                var promotion = await _orderRepository.GetPromotionByIdAsync(request.PromotionId.Value);
+                if (promotion != null)
+                {
+                    order.DiscountAmount = totalPrice * (promotion.DiscountPercentage / 100);
+                    order.FinalPrice = totalPrice - order.DiscountAmount;
+                }
+                else
+                {
+                    order.DiscountAmount = 0;
+                    order.FinalPrice = totalPrice;
+                }
+            }
+            else
+            {
+                order.DiscountAmount = 0;
+                order.FinalPrice = totalPrice;
+            }
+
             var createdOrder = await _orderRepository.AddAsync(order);
             var result = await _orderRepository.GetByIdAsync(createdOrder.Id);
+            
+            if (result == null)
+                throw new InvalidOperationException($"Order with id {createdOrder.Id} not found");
             
             return _mapper.Map<CreateOrderResult>(result);
         }

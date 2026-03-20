@@ -13,7 +13,9 @@ namespace WebBanHang.Features.OrderFeatures.Commands.UpdateOrder
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.Username))
                 .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()))
                 .ForMember(dest => dest.PromotionCode, opt => opt.MapFrom(src => src.Promotion != null ? src.Promotion.Code : null))
-                .ForMember(dest => dest.TotalPrice, opt => opt.MapFrom(src => src.OrderItems.Sum(oi => oi.Quantity * oi.UnitPrice)));
+                .ForMember(dest => dest.TotalPrice, opt => opt.MapFrom(src => src.OrderItems.Sum(oi => oi.Quantity * oi.UnitPrice)))
+                .ForMember(dest => dest.DiscountAmount, opt => opt.MapFrom(src => src.DiscountAmount))
+                .ForMember(dest => dest.FinalPrice, opt => opt.MapFrom(src => src.FinalPrice));
         }
     }
 }

@@ -21,6 +21,9 @@ namespace WebBanHang.Entity
 
         public ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 
+        public decimal DiscountAmount { get; set; } = 0;
+        public decimal FinalPrice { get; set; } = 0;
+
         public OrderStatus Status { get; set; } = OrderStatus.Pending;
     }
 }

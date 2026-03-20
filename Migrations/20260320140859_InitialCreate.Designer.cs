@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebBanHang.DbContextConfig;
 
@@ -11,9 +12,11 @@ using WebBanHang.DbContextConfig;
 namespace WebBanHang.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260320140859_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -321,12 +324,6 @@ namespace WebBanHang.Migrations
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("DiscountAmount")
-                        .HasColumnType("decimal(65,30)");
-
-                    b.Property<decimal>("FinalPrice")
-                        .HasColumnType("decimal(65,30)");
-
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime(6)");
 
@@ -354,8 +351,6 @@ namespace WebBanHang.Migrations
                         {
                             Id = 1,
                             CustomerId = 1,
-                            DiscountAmount = 0m,
-                            FinalPrice = 0m,
                             OrderDate = new DateTime(2025, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 1,
                             UserId = 1
@@ -364,8 +359,6 @@ namespace WebBanHang.Migrations
                         {
                             Id = 2,
                             CustomerId = 2,
-                            DiscountAmount = 0m,
-                            FinalPrice = 0m,
                             OrderDate = new DateTime(2025, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 1,
                             UserId = 2
@@ -374,8 +367,6 @@ namespace WebBanHang.Migrations
                         {
                             Id = 3,
                             CustomerId = 3,
-                            DiscountAmount = 0m,
-                            FinalPrice = 0m,
                             OrderDate = new DateTime(2025, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             UserId = 3
@@ -384,8 +375,6 @@ namespace WebBanHang.Migrations
                         {
                             Id = 4,
                             CustomerId = 4,
-                            DiscountAmount = 0m,
-                            FinalPrice = 0m,
                             OrderDate = new DateTime(2025, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 2,
                             UserId = 1
@@ -394,8 +383,6 @@ namespace WebBanHang.Migrations
                         {
                             Id = 5,
                             CustomerId = 5,
-                            DiscountAmount = 0m,
-                            FinalPrice = 0m,
                             OrderDate = new DateTime(2025, 1, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 1,
                             UserId = 2
@@ -404,8 +391,6 @@ namespace WebBanHang.Migrations
                         {
                             Id = 6,
                             CustomerId = 6,
-                            DiscountAmount = 0m,
-                            FinalPrice = 0m,
                             OrderDate = new DateTime(2025, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             UserId = 3
@@ -414,8 +399,6 @@ namespace WebBanHang.Migrations
                         {
                             Id = 7,
                             CustomerId = 7,
-                            DiscountAmount = 0m,
-                            FinalPrice = 0m,
                             OrderDate = new DateTime(2025, 1, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 1,
                             UserId = 1
@@ -424,8 +407,6 @@ namespace WebBanHang.Migrations
                         {
                             Id = 8,
                             CustomerId = 8,
-                            DiscountAmount = 0m,
-                            FinalPrice = 0m,
                             OrderDate = new DateTime(2025, 1, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 1,
                             UserId = 2
@@ -434,8 +415,6 @@ namespace WebBanHang.Migrations
                         {
                             Id = 9,
                             CustomerId = 9,
-                            DiscountAmount = 0m,
-                            FinalPrice = 0m,
                             OrderDate = new DateTime(2025, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             UserId = 3
@@ -444,8 +423,6 @@ namespace WebBanHang.Migrations
                         {
                             Id = 10,
                             CustomerId = 10,
-                            DiscountAmount = 0m,
-                            FinalPrice = 0m,
                             OrderDate = new DateTime(2025, 1, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 1,
                             UserId = 1
@@ -808,7 +785,7 @@ namespace WebBanHang.Migrations
                         {
                             Id = 1,
                             Fullname = "Admin System",
-                            Password = "AQAAAAIAAYagAAAAEOE2ega9OA4hS6ssmpzDmshtb0UJ+HMGV6na6CTNgh087YjhaIk77qKeU+QvB+HG8g==",
+                            Password = "AQAAAAIAAYagAAAAEGa1GIQ7nJfqd6fuJBlZdkzXeBshHekELNTPuBuQoqm7hsJ6D93LP0998duC6Cd0Rw==",
                             Role = 0,
                             Username = "admin01"
                         },
@@ -816,7 +793,7 @@ namespace WebBanHang.Migrations
                         {
                             Id = 2,
                             Fullname = "Nhân viên 1",
-                            Password = "AQAAAAIAAYagAAAAENo+S0UGvREsQYoWEpAUkBi8XbtC1W0HUlmaFGAzQTt3WAr/mSTQG2WuhDhpAapzew==",
+                            Password = "AQAAAAIAAYagAAAAEHwVhO45UnZweDFaWKPrUMogupDSh0yLSq+FURGvIpC41rUDmEEqAZQ2SXWbrVxmtQ==",
                             Role = 1,
                             Username = "staff01"
                         },
@@ -824,7 +801,7 @@ namespace WebBanHang.Migrations
                         {
                             Id = 3,
                             Fullname = "Nhân viên 2",
-                            Password = "AQAAAAIAAYagAAAAEE+I/Ns21CXCqleq0jGwpbHTV3eWHnWa2D2y7pKgeA9PLk/eMfcIUHyj5eA6UsXnpg==",
+                            Password = "AQAAAAIAAYagAAAAEGmmiDG5zkafFhmG+mZZkJ9m8bT7A2eWa67xFInSTZO0MooSp7rrcndHw7krGv5Qiw==",
                             Role = 1,
                             Username = "staff02"
                         });

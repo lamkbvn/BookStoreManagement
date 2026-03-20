@@ -10,5 +10,6 @@ namespace WebBanHang.Repository.Interface
         Task<bool> ExistsByIdAsync(int id);
         Task<Order> UpdateAsync(Order order);
         Task DeleteAsync(Order order);
+        Task<Promotion?> GetPromotionByIdAsync(int promotionId);
     }
 }

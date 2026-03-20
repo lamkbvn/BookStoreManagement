@@ -57,6 +57,27 @@ namespace WebBanHang.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "Promotions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Code = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Description = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    DiscountPercentage = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Promotions", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "Suppliers",
                 columns: table => new
                 {
@@ -130,6 +151,7 @@ namespace WebBanHang.Migrations
                     OrderDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     CustomerId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
+                    PromotionId = table.Column<int>(type: "int", nullable: true),
                     Status = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -141,6 +163,11 @@ namespace WebBanHang.Migrations
                         principalTable: "Customers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Orders_Promotions_PromotionId",
+                        column: x => x.PromotionId,
+                        principalTable: "Promotions",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Orders_Users_UserId",
                         column: x => x.UserId,
@@ -256,26 +283,26 @@ namespace WebBanHang.Migrations
                 columns: new[] { "Id", "Fullname", "Password", "Role", "Username" },
                 values: new object[,]
                 {
-                    { 1, "Admin System", "AQAAAAIAAYagAAAAEKQqWutR/PQhPVCCvyhLoEw4GXCaiprDv6Whw0MjX8ZYaitWRKXbPVyXFfV7ubG6tw==", 0, "admin" },
-                    { 2, "Nhân viên 1", "AQAAAAIAAYagAAAAEP2tZCqkvbYVe/rI8ttfDynzQcq2ecz/Fl2IcrKVhPkeutGtdj/3LFGz8H3QSylpXw==", 1, "staff1" },
-                    { 3, "Nhân viên 2", "AQAAAAIAAYagAAAAEM5ugcU8qqAO8wO3QKaVgF7sbWHCkAzitS2QUv4Hxsa74Jp/yMUYOHOleRM2eYqNng==", 1, "staff2" }
+                    { 1, "Admin System", "AQAAAAIAAYagAAAAEGa1GIQ7nJfqd6fuJBlZdkzXeBshHekELNTPuBuQoqm7hsJ6D93LP0998duC6Cd0Rw==", 0, "admin01" },
+                    { 2, "Nhân viên 1", "AQAAAAIAAYagAAAAEHwVhO45UnZweDFaWKPrUMogupDSh0yLSq+FURGvIpC41rUDmEEqAZQ2SXWbrVxmtQ==", 1, "staff01" },
+                    { 3, "Nhân viên 2", "AQAAAAIAAYagAAAAEGmmiDG5zkafFhmG+mZZkJ9m8bT7A2eWa67xFInSTZO0MooSp7rrcndHw7krGv5Qiw==", 1, "staff02" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Orders",
-                columns: new[] { "Id", "CustomerId", "OrderDate", "Status", "UserId" },
+                columns: new[] { "Id", "CustomerId", "OrderDate", "PromotionId", "Status", "UserId" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2025, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1 },
-                    { 2, 2, new DateTime(2025, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 2 },
-                    { 3, 3, new DateTime(2025, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, 3 },
-                    { 4, 4, new DateTime(2025, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 1 },
-                    { 5, 5, new DateTime(2025, 1, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 2 },
-                    { 6, 6, new DateTime(2025, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, 3 },
-                    { 7, 7, new DateTime(2025, 1, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1 },
-                    { 8, 8, new DateTime(2025, 1, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 2 },
-                    { 9, 9, new DateTime(2025, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, 3 },
-                    { 10, 10, new DateTime(2025, 1, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1 }
+                    { 1, 1, new DateTime(2025, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 1, 1 },
+                    { 2, 2, new DateTime(2025, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 1, 2 },
+                    { 3, 3, new DateTime(2025, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 0, 3 },
+                    { 4, 4, new DateTime(2025, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 2, 1 },
+                    { 5, 5, new DateTime(2025, 1, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 1, 2 },
+                    { 6, 6, new DateTime(2025, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 0, 3 },
+                    { 7, 7, new DateTime(2025, 1, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 1, 1 },
+                    { 8, 8, new DateTime(2025, 1, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 1, 2 },
+                    { 9, 9, new DateTime(2025, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 0, 3 },
+                    { 10, 10, new DateTime(2025, 1, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 1, 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -351,6 +378,11 @@ namespace WebBanHang.Migrations
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Orders_PromotionId",
+                table: "Orders",
+                column: "PromotionId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Orders_UserId",
                 table: "Orders",
                 column: "UserId");
@@ -383,6 +415,9 @@ namespace WebBanHang.Migrations
 
             migrationBuilder.DropTable(
                 name: "Customers");
+
+            migrationBuilder.DropTable(
+                name: "Promotions");
 
             migrationBuilder.DropTable(
                 name: "Users");

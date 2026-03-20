@@ -9,5 +9,7 @@ namespace WebBanHang.Features.OrderFeatures.Commands.UpdateOrder
         public string Status { get; set; } = string.Empty;
         public string? PromotionCode { get; set; }
         public decimal TotalPrice { get; set; }
+        public decimal DiscountAmount { get; set; }
+        public decimal FinalPrice { get; set; }
     }
 }

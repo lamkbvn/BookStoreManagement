@@ -11,6 +11,8 @@ namespace WebBanHang.Features.OrderFeatures.Commands.CreateOrder
         public string Status { get; set; } = "Pending";
         public string? PromotionCode { get; set; }
         public decimal TotalPrice { get; set; }
+        public decimal DiscountAmount { get; set; }
+        public decimal FinalPrice { get; set; }
         public List<OrderItemResultDto> OrderItems { get; set; } = new();
     }
 }
