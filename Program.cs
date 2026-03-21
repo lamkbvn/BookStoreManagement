@@ -38,8 +38,6 @@ builder.Services.AddAutoMapper(typeof(Program));
 
 builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
-
-// ⭐ QUAN TRỌNG: CHỈ 1 DÒNG DUY NHẤT
 builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
 
 builder.Services.AddTransient(

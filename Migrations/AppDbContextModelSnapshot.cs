@@ -354,9 +354,10 @@ namespace WebBanHang.Migrations
                         {
                             Id = 1,
                             CustomerId = 1,
-                            DiscountAmount = 0m,
-                            FinalPrice = 0m,
+                            DiscountAmount = 10000m,
+                            FinalPrice = 165000m,
                             OrderDate = new DateTime(2025, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PromotionId = 1,
                             Status = 1,
                             UserId = 1
                         },
@@ -364,9 +365,10 @@ namespace WebBanHang.Migrations
                         {
                             Id = 2,
                             CustomerId = 2,
-                            DiscountAmount = 0m,
-                            FinalPrice = 0m,
+                            DiscountAmount = 20000m,
+                            FinalPrice = 260000m,
                             OrderDate = new DateTime(2025, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PromotionId = 2,
                             Status = 1,
                             UserId = 2
                         },
@@ -375,7 +377,7 @@ namespace WebBanHang.Migrations
                             Id = 3,
                             CustomerId = 3,
                             DiscountAmount = 0m,
-                            FinalPrice = 0m,
+                            FinalPrice = 270000m,
                             OrderDate = new DateTime(2025, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             UserId = 3
@@ -384,9 +386,10 @@ namespace WebBanHang.Migrations
                         {
                             Id = 4,
                             CustomerId = 4,
-                            DiscountAmount = 0m,
-                            FinalPrice = 0m,
+                            DiscountAmount = 15000m,
+                            FinalPrice = 95000m,
                             OrderDate = new DateTime(2025, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PromotionId = 3,
                             Status = 2,
                             UserId = 1
                         },
@@ -394,9 +397,10 @@ namespace WebBanHang.Migrations
                         {
                             Id = 5,
                             CustomerId = 5,
-                            DiscountAmount = 0m,
-                            FinalPrice = 0m,
+                            DiscountAmount = 10000m,
+                            FinalPrice = 280000m,
                             OrderDate = new DateTime(2025, 1, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PromotionId = 1,
                             Status = 1,
                             UserId = 2
                         },
@@ -405,7 +409,7 @@ namespace WebBanHang.Migrations
                             Id = 6,
                             CustomerId = 6,
                             DiscountAmount = 0m,
-                            FinalPrice = 0m,
+                            FinalPrice = 130000m,
                             OrderDate = new DateTime(2025, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             UserId = 3
@@ -414,39 +418,10 @@ namespace WebBanHang.Migrations
                         {
                             Id = 7,
                             CustomerId = 7,
-                            DiscountAmount = 0m,
-                            FinalPrice = 0m,
+                            DiscountAmount = 20000m,
+                            FinalPrice = 140000m,
                             OrderDate = new DateTime(2025, 1, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Status = 1,
-                            UserId = 1
-                        },
-                        new
-                        {
-                            Id = 8,
-                            CustomerId = 8,
-                            DiscountAmount = 0m,
-                            FinalPrice = 0m,
-                            OrderDate = new DateTime(2025, 1, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Status = 1,
-                            UserId = 2
-                        },
-                        new
-                        {
-                            Id = 9,
-                            CustomerId = 9,
-                            DiscountAmount = 0m,
-                            FinalPrice = 0m,
-                            OrderDate = new DateTime(2025, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Status = 0,
-                            UserId = 3
-                        },
-                        new
-                        {
-                            Id = 10,
-                            CustomerId = 10,
-                            DiscountAmount = 0m,
-                            FinalPrice = 0m,
-                            OrderDate = new DateTime(2025, 1, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PromotionId = 2,
                             Status = 1,
                             UserId = 1
                         });
@@ -708,6 +683,63 @@ namespace WebBanHang.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Promotions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Code = "SALE10",
+                            Description = "Giảm 10% cho tất cả sản phẩm",
+                            DiscountPercentage = 10m,
+                            EndDate = new DateTime(2025, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = true,
+                            MaximumDiscountAmount = 100000m,
+                            StartDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Code = "SALE20",
+                            Description = "Giảm 20% tối đa 200k",
+                            DiscountPercentage = 20m,
+                            EndDate = new DateTime(2025, 6, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = true,
+                            MaximumDiscountAmount = 200000m,
+                            StartDate = new DateTime(2025, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Code = "NEWUSER",
+                            Description = "Ưu đãi cho người dùng mới",
+                            DiscountPercentage = 15m,
+                            EndDate = new DateTime(2025, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = true,
+                            MaximumDiscountAmount = 150000m,
+                            StartDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Code = "BLACKFRIDAY",
+                            Description = "Khuyến mãi Black Friday",
+                            DiscountPercentage = 30m,
+                            EndDate = new DateTime(2025, 11, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = true,
+                            MaximumDiscountAmount = 500000m,
+                            StartDate = new DateTime(2025, 11, 25, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Code = "EXPIRED",
+                            Description = "Mã đã hết hạn để test logic",
+                            DiscountPercentage = 5m,
+                            EndDate = new DateTime(2024, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = false,
+                            MaximumDiscountAmount = 50000m,
+                            StartDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("WebBanHang.Entity.Supplier", b =>
@@ -811,7 +843,7 @@ namespace WebBanHang.Migrations
                         {
                             Id = 1,
                             Fullname = "Admin System",
-                            Password = "AQAAAAIAAYagAAAAEH5szNlQ18SOt+xzydG9vmu0MANEAbOa4n7/IBF3iImLEUm2FAP9OLUKbLDEvpdMaA==",
+                            Password = "AQAAAAIAAYagAAAAEFckgXoO1gkDSgC1bcpyItU5Zok64eUrAVxaP5bwGLoC48UOCoZpPLEcQoaWNw+JBQ==",
                             Role = 0,
                             Username = "admin01"
                         },
@@ -819,7 +851,7 @@ namespace WebBanHang.Migrations
                         {
                             Id = 2,
                             Fullname = "Nhân viên 1",
-                            Password = "AQAAAAIAAYagAAAAEIgaw7bLwlyxNDLOlNFb4BOF78aQSaQW7k6wfMeBNbT2PiLRsaluOwp5cqXa/FL3kg==",
+                            Password = "AQAAAAIAAYagAAAAEO4BsSQVRxz9gR/KNbbNlL23GBqECiVI0q+uAa4UHqEQWw6uNyK4t6wHHCs8sWCT6w==",
                             Role = 1,
                             Username = "staff01"
                         },
@@ -827,7 +859,7 @@ namespace WebBanHang.Migrations
                         {
                             Id = 3,
                             Fullname = "Nhân viên 2",
-                            Password = "AQAAAAIAAYagAAAAEFuhauWS5GcTe+uRCaNI+zHafzTRuhDHnFL2wNQNrQs9sjg56vuyx+qP5OJzJzk5JA==",
+                            Password = "AQAAAAIAAYagAAAAEDm9cvhRbwAN44an9Ogz35rjPcOEqQq76vSLJls/HZP5YkEkrAy+t9k444Ej23rVxQ==",
                             Role = 1,
                             Username = "staff02"
                         });

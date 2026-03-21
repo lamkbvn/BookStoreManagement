@@ -30,5 +30,29 @@ namespace WebBanHang.Repository.Implement
             await _context.SaveChangesAsync();
             return user;
         }
+
+        public async Task<User> UpdateAsync(User user)
+        {
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
+            return user;
+        }
+
+        public async Task DeleteAsync(User user)
+        {
+            _context.Users.Remove(user);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<User?> FindById(int id)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+            return user;
+        }
+
+        public async Task<List<User>> GetAll()
+        {
+            return await _context.Users.ToListAsync();
+        }
     }
 }

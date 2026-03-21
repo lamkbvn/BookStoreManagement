@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WebBanHang.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class firstMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -67,6 +67,7 @@ namespace WebBanHang.Migrations
                     Description = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     DiscountPercentage = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    MaximumDiscountAmount = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false)
@@ -152,6 +153,8 @@ namespace WebBanHang.Migrations
                     CustomerId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     PromotionId = table.Column<int>(type: "int", nullable: true),
+                    DiscountAmount = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    FinalPrice = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -262,6 +265,18 @@ namespace WebBanHang.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Promotions",
+                columns: new[] { "Id", "Code", "Description", "DiscountPercentage", "EndDate", "IsActive", "MaximumDiscountAmount", "StartDate" },
+                values: new object[,]
+                {
+                    { 1, "SALE10", "Giảm 10% cho tất cả sản phẩm", 10m, new DateTime(2025, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), true, 100000m, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, "SALE20", "Giảm 20% tối đa 200k", 20m, new DateTime(2025, 6, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), true, 200000m, new DateTime(2025, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 3, "NEWUSER", "Ưu đãi cho người dùng mới", 15m, new DateTime(2025, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), true, 150000m, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 4, "BLACKFRIDAY", "Khuyến mãi Black Friday", 30m, new DateTime(2025, 11, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), true, 500000m, new DateTime(2025, 11, 25, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 5, "EXPIRED", "Mã đã hết hạn để test logic", 5m, new DateTime(2024, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), false, 50000m, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Suppliers",
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
@@ -283,26 +298,23 @@ namespace WebBanHang.Migrations
                 columns: new[] { "Id", "Fullname", "Password", "Role", "Username" },
                 values: new object[,]
                 {
-                    { 1, "Admin System", "AQAAAAIAAYagAAAAEGa1GIQ7nJfqd6fuJBlZdkzXeBshHekELNTPuBuQoqm7hsJ6D93LP0998duC6Cd0Rw==", 0, "admin01" },
-                    { 2, "Nhân viên 1", "AQAAAAIAAYagAAAAEHwVhO45UnZweDFaWKPrUMogupDSh0yLSq+FURGvIpC41rUDmEEqAZQ2SXWbrVxmtQ==", 1, "staff01" },
-                    { 3, "Nhân viên 2", "AQAAAAIAAYagAAAAEGmmiDG5zkafFhmG+mZZkJ9m8bT7A2eWa67xFInSTZO0MooSp7rrcndHw7krGv5Qiw==", 1, "staff02" }
+                    { 1, "Admin System", "AQAAAAIAAYagAAAAEFckgXoO1gkDSgC1bcpyItU5Zok64eUrAVxaP5bwGLoC48UOCoZpPLEcQoaWNw+JBQ==", 0, "admin01" },
+                    { 2, "Nhân viên 1", "AQAAAAIAAYagAAAAEO4BsSQVRxz9gR/KNbbNlL23GBqECiVI0q+uAa4UHqEQWw6uNyK4t6wHHCs8sWCT6w==", 1, "staff01" },
+                    { 3, "Nhân viên 2", "AQAAAAIAAYagAAAAEDm9cvhRbwAN44an9Ogz35rjPcOEqQq76vSLJls/HZP5YkEkrAy+t9k444Ej23rVxQ==", 1, "staff02" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Orders",
-                columns: new[] { "Id", "CustomerId", "OrderDate", "PromotionId", "Status", "UserId" },
+                columns: new[] { "Id", "CustomerId", "DiscountAmount", "FinalPrice", "OrderDate", "PromotionId", "Status", "UserId" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2025, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 1, 1 },
-                    { 2, 2, new DateTime(2025, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 1, 2 },
-                    { 3, 3, new DateTime(2025, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 0, 3 },
-                    { 4, 4, new DateTime(2025, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 2, 1 },
-                    { 5, 5, new DateTime(2025, 1, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 1, 2 },
-                    { 6, 6, new DateTime(2025, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 0, 3 },
-                    { 7, 7, new DateTime(2025, 1, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 1, 1 },
-                    { 8, 8, new DateTime(2025, 1, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 1, 2 },
-                    { 9, 9, new DateTime(2025, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 0, 3 },
-                    { 10, 10, new DateTime(2025, 1, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 1, 1 }
+                    { 1, 1, 10000m, 165000m, new DateTime(2025, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1, 1 },
+                    { 2, 2, 20000m, 260000m, new DateTime(2025, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 1, 2 },
+                    { 3, 3, 0m, 270000m, new DateTime(2025, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 0, 3 },
+                    { 4, 4, 15000m, 95000m, new DateTime(2025, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 2, 1 },
+                    { 5, 5, 10000m, 280000m, new DateTime(2025, 1, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1, 2 },
+                    { 6, 6, 0m, 130000m, new DateTime(2025, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 0, 3 },
+                    { 7, 7, 20000m, 140000m, new DateTime(2025, 1, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 1, 1 }
                 });
 
             migrationBuilder.InsertData(

@@ -196,19 +196,146 @@ public static class DbSeed
 
         modelBuilder.Entity<User>().HasData(admin, staff1, staff2);
 
+
+        //==== PROMOTION ====
+        modelBuilder.Entity<Promotion>().HasData(
+        new Promotion
+        {
+            Id = 1,
+            Code = "SALE10",
+            Description = "Giảm 10% cho tất cả sản phẩm",
+            DiscountPercentage = 10,
+            MaximumDiscountAmount = 100000,
+            StartDate = new DateTime(2025, 1, 1),
+            EndDate = new DateTime(2025, 12, 31),
+            IsActive = true
+        },
+        new Promotion
+        {
+            Id = 2,
+            Code = "SALE20",
+            Description = "Giảm 20% tối đa 200k",
+            DiscountPercentage = 20,
+            MaximumDiscountAmount = 200000,
+            StartDate = new DateTime(2025, 2, 1),
+            EndDate = new DateTime(2025, 6, 30),
+            IsActive = true
+        },
+        new Promotion
+        {
+            Id = 3,
+            Code = "NEWUSER",
+            Description = "Ưu đãi cho người dùng mới",
+            DiscountPercentage = 15,
+            MaximumDiscountAmount = 150000,
+            StartDate = new DateTime(2025, 1, 1),
+            EndDate = new DateTime(2025, 12, 31),
+            IsActive = true
+        },
+        new Promotion
+        {
+            Id = 4,
+            Code = "BLACKFRIDAY",
+            Description = "Khuyến mãi Black Friday",
+            DiscountPercentage = 30,
+            MaximumDiscountAmount = 500000,
+            StartDate = new DateTime(2025, 11, 25),
+            EndDate = new DateTime(2025, 11, 30),
+            IsActive = true
+        },
+        new Promotion
+        {
+            Id = 5,
+            Code = "EXPIRED",
+            Description = "Mã đã hết hạn để test logic",
+            DiscountPercentage = 5,
+            MaximumDiscountAmount = 50000,
+            StartDate = new DateTime(2024, 1, 1),
+            EndDate = new DateTime(2024, 12, 31),
+            IsActive = false
+        }
+    );
+
         // ===== ORDER =====
         modelBuilder.Entity<Order>().HasData(
-            new Order { Id = 1, CustomerId = 1, UserId = 1, Status = OrderStatus.Paid, OrderDate = new DateTime(2025, 1, 5) },
-            new Order { Id = 2, CustomerId = 2, UserId = 2, Status = OrderStatus.Paid, OrderDate = new DateTime(2025, 1, 6) },
-            new Order { Id = 3, CustomerId = 3, UserId = 3, Status = OrderStatus.Pending, OrderDate = new DateTime(2025, 1, 7) },
-            new Order { Id = 4, CustomerId = 4, UserId = 1, Status = OrderStatus.Cancelled, OrderDate = new DateTime(2025, 1, 8) },
-            new Order { Id = 5, CustomerId = 5, UserId = 2, Status = OrderStatus.Paid, OrderDate = new DateTime(2025, 1, 9) },
-            new Order { Id = 6, CustomerId = 6, UserId = 3, Status = OrderStatus.Pending, OrderDate = new DateTime(2025, 1, 10) },
-            new Order { Id = 7, CustomerId = 7, UserId = 1, Status = OrderStatus.Paid, OrderDate = new DateTime(2025, 1, 11) },
-            new Order { Id = 8, CustomerId = 8, UserId = 2, Status = OrderStatus.Paid, OrderDate = new DateTime(2025, 1, 12) },
-            new Order { Id = 9, CustomerId = 9, UserId = 3, Status = OrderStatus.Pending, OrderDate = new DateTime(2025, 1, 13) },
-            new Order { Id = 10, CustomerId = 10, UserId = 1, Status = OrderStatus.Paid, OrderDate = new DateTime(2025, 1, 14) }
-        );
+    new Order
+    {
+        Id = 1,
+        CustomerId = 1,
+        UserId = 1,
+        PromotionId = 1,
+        DiscountAmount = 10000,
+        FinalPrice = 165000,
+        Status = OrderStatus.Paid,
+        OrderDate = new DateTime(2025, 1, 5)
+    },
+    new Order
+    {
+        Id = 2,
+        CustomerId = 2,
+        UserId = 2,
+        PromotionId = 2,
+        DiscountAmount = 20000,
+        FinalPrice = 260000,
+        Status = OrderStatus.Paid,
+        OrderDate = new DateTime(2025, 1, 6)
+    },
+    new Order
+    {
+        Id = 3,
+        CustomerId = 3,
+        UserId = 3,
+        PromotionId = null,
+        DiscountAmount = 0,
+        FinalPrice = 270000,
+        Status = OrderStatus.Pending,
+        OrderDate = new DateTime(2025, 1, 7)
+    },
+    new Order
+    {
+        Id = 4,
+        CustomerId = 4,
+        UserId = 1,
+        PromotionId = 3,
+        DiscountAmount = 15000,
+        FinalPrice = 95000,
+        Status = OrderStatus.Cancelled,
+        OrderDate = new DateTime(2025, 1, 8)
+    },
+    new Order
+    {
+        Id = 5,
+        CustomerId = 5,
+        UserId = 2,
+        PromotionId = 1,
+        DiscountAmount = 10000,
+        FinalPrice = 280000,
+        Status = OrderStatus.Paid,
+        OrderDate = new DateTime(2025, 1, 9)
+    },
+    new Order
+    {
+        Id = 6,
+        CustomerId = 6,
+        UserId = 3,
+        PromotionId = null,
+        DiscountAmount = 0,
+        FinalPrice = 130000,
+        Status = OrderStatus.Pending,
+        OrderDate = new DateTime(2025, 1, 10)
+    },
+    new Order
+    {
+        Id = 7,
+        CustomerId = 7,
+        UserId = 1,
+        PromotionId = 2,
+        DiscountAmount = 20000,
+        FinalPrice = 140000,
+        Status = OrderStatus.Paid,
+        OrderDate = new DateTime(2025, 1, 11)
+    }
+);
 
 
 

@@ -1,11 +1,11 @@
 ﻿using MediatR;
 using WebBanHang.Enum;
 
-namespace WebBanHang.Features.UserFeatures.Command.Register
+namespace WebBanHang.Features.UserFeatures.Command.UpdateUser
 {
-    public class RegisterCommand : IRequest<RegisterResult>
+    public class UpdateUserCommand : IRequest<UpdateUserResult>
     {
-        public required string Username { get; set; }
+        public required int Id { get; set; }
         public required string Password { get; set; }
         public required string Fullname { get; set; }
         public required Role Role { get; set; }

@@ -1,5 +1,7 @@
 ﻿// Thư viện FluentValidation để bắt ValidationException
 using FluentValidation;
+using Microsoft.EntityFrameworkCore;
+
 
 // Dùng để serialize object -> JSON trả về client
 using System.Text.Json;
@@ -42,12 +44,27 @@ public class ExceptionMiddleware
             // Xử lý lỗi nghiệp vụ theo status code mong muốn
             await HandleAppException(context, ex);
         }
+        // Bắt lỗi dữ liệu xung đột
+        catch (DbUpdateException ex)
+        {
+            context.Response.StatusCode = StatusCodes.Status409Conflict;
+
+            var response = new ApiResponse<string>
+            {
+                StatusCode = 409,
+                Message = "Dữ liệu đang được sử dụng, không thể xóa",
+                Data = null
+            };
+
+            await context.Response.WriteAsJsonAsync(response);
+        }
         // Bắt tất cả lỗi còn lại (null reference, bug, lỗi hệ thống...)
         catch (Exception)
         {
             // Trả lỗi 500 – internal server error
             await HandleUnknownException(context);
         }
+
     }
 
     // Xử lý ValidationException (DTO không hợp lệ)

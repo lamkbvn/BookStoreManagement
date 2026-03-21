@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebBanHang.Common.Extensions;
 using WebBanHang.Features.PromotionFeatures.Commands.CreatePromotion;
@@ -11,6 +12,7 @@ namespace WebBanHang.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize(Roles = "Admin,Staff")]
     public class PromotionController : ControllerBase
     {
         private readonly IMediator _mediator;
