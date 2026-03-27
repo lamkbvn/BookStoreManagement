@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using WebBanHang.Entity;
 using WebBanHang.SeedData;
 
@@ -19,6 +19,8 @@ namespace WebBanHang.DbContextConfig
         public DbSet<Promotion> Promotions { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<ImportReceipt> ImportReceipts { get; set; }
+        public DbSet<ImportReceiptItem> ImportReceiptItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
