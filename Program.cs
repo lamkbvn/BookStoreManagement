@@ -138,6 +138,13 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddAuthorization();
 
+// Cấu hình Redis Cache
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = builder.Configuration["Redis:ConnectionString"];
+    options.InstanceName = "MyApp_";
+});
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

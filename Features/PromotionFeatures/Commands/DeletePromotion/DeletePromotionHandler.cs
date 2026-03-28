@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.Extensions.Caching.Distributed;
 using WebBanHang.Repository.Interface;
 
 namespace WebBanHang.Features.PromotionFeatures.Commands.DeletePromotion
@@ -7,10 +8,15 @@ namespace WebBanHang.Features.PromotionFeatures.Commands.DeletePromotion
         : IRequestHandler<DeletePromotionCommand, bool>
     {
         private readonly IPromotionRepository _promotionRepository;
+        private readonly IDistributedCache _cache;
+        private const string CACHE_KEY = "all_promotions";
 
-        public DeletePromotionHandler(IPromotionRepository promotionRepository)
+        public DeletePromotionHandler(
+            IPromotionRepository promotionRepository,
+            IDistributedCache cache)
         {
             _promotionRepository = promotionRepository;
+            _cache = cache;
         }
 
         public async Task<bool> Handle(
@@ -22,6 +28,11 @@ namespace WebBanHang.Features.PromotionFeatures.Commands.DeletePromotion
                 throw new InvalidOperationException($"Promotion with id {request.Id} not found");
 
             await _promotionRepository.DeleteAsync(promotion);
+
+            // Xóa cache khi xóa promotion
+            await _cache.RemoveAsync(CACHE_KEY, cancellationToken);
+            await _cache.RemoveAsync($"promotion_{request.Id}", cancellationToken);
+
             return true;
         }
     }

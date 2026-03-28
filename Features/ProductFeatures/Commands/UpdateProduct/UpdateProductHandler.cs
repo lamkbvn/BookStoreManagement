@@ -1,5 +1,6 @@
 using AutoMapper;
 using MediatR;
+using Microsoft.Extensions.Caching.Distributed;
 using WebBanHang.Common.Exceptions;
 using WebBanHang.Repository.Interface;
 
@@ -9,11 +10,14 @@ namespace WebBanHang.Features.ProductFeatures.Commands.UpdateProduct
     {
         private readonly IProductRepository _productRepository;
         private readonly IMapper _mapper;
+        private readonly IDistributedCache _cache;
+        private const string CACHE_KEY = "all_products";
 
-        public UpdateProductHandler(IProductRepository productRepository, IMapper mapper)
+        public UpdateProductHandler(IProductRepository productRepository, IMapper mapper, IDistributedCache cache)
         {
             _productRepository = productRepository;
             _mapper = mapper;
+            _cache = cache;
         }
 
         public async Task<UpdateProductResult> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
@@ -32,6 +36,10 @@ namespace WebBanHang.Features.ProductFeatures.Commands.UpdateProduct
             await _productRepository.UpdateAsync(product, request.Quantity);
 
             var full = await _productRepository.GetByIdAsync(product.Id) ?? product;
+            
+            // Xóa cache khi cập nhật sản phẩm
+            await _cache.RemoveAsync(CACHE_KEY, cancellationToken);
+            
             return _mapper.Map<UpdateProductResult>(full);
         }
     }

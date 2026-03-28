@@ -1,5 +1,6 @@
 using AutoMapper;
 using MediatR;
+using Microsoft.Extensions.Caching.Distributed;
 using WebBanHang.Repository.Interface;
 
 namespace WebBanHang.Features.PromotionFeatures.Commands.UpdatePromotion
@@ -9,13 +10,17 @@ namespace WebBanHang.Features.PromotionFeatures.Commands.UpdatePromotion
     {
         private readonly IPromotionRepository _promotionRepository;
         private readonly IMapper _mapper;
+        private readonly IDistributedCache _cache;
+        private const string CACHE_KEY = "all_promotions";
 
         public UpdatePromotionHandler(
             IPromotionRepository promotionRepository,
-            IMapper mapper)
+            IMapper mapper,
+            IDistributedCache cache)
         {
             _promotionRepository = promotionRepository;
             _mapper = mapper;
+            _cache = cache;
         }
 
         public async Task<UpdatePromotionResult> Handle(
@@ -35,6 +40,11 @@ namespace WebBanHang.Features.PromotionFeatures.Commands.UpdatePromotion
             promotion.IsActive = request.IsActive;
 
             var updatedPromotion = await _promotionRepository.UpdateAsync(promotion);
+
+            // Xóa cache khi cập nhật promotion
+            await _cache.RemoveAsync(CACHE_KEY, cancellationToken);
+            await _cache.RemoveAsync($"promotion_{request.Id}", cancellationToken);
+
             return _mapper.Map<UpdatePromotionResult>(updatedPromotion);
         }
     }
