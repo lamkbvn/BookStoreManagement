@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WebBanHang.Migrations
 {
     /// <inheritdoc />
-    public partial class firstMigration : Migration
+    public partial class finalmigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -144,6 +144,36 @@ namespace WebBanHang.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "ImportReceipts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ImportDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    SupplierId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    TotalAmount = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ImportReceipts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ImportReceipts_Suppliers_SupplierId",
+                        column: x => x.SupplierId,
+                        principalTable: "Suppliers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ImportReceipts_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "Orders",
                 columns: table => new
                 {
@@ -194,6 +224,35 @@ namespace WebBanHang.Migrations
                     table.PrimaryKey("PK_Inventories", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Inventories_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "ImportReceiptItems",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    UnitCost = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    ImportReceiptId = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ImportReceiptItems", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ImportReceiptItems_ImportReceipts_ImportReceiptId",
+                        column: x => x.ImportReceiptId,
+                        principalTable: "ImportReceipts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ImportReceiptItems_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
@@ -298,9 +357,20 @@ namespace WebBanHang.Migrations
                 columns: new[] { "Id", "Fullname", "Password", "Role", "Username" },
                 values: new object[,]
                 {
-                    { 1, "Admin System", "AQAAAAIAAYagAAAAEFckgXoO1gkDSgC1bcpyItU5Zok64eUrAVxaP5bwGLoC48UOCoZpPLEcQoaWNw+JBQ==", 0, "admin01" },
-                    { 2, "Nhân viên 1", "AQAAAAIAAYagAAAAEO4BsSQVRxz9gR/KNbbNlL23GBqECiVI0q+uAa4UHqEQWw6uNyK4t6wHHCs8sWCT6w==", 1, "staff01" },
-                    { 3, "Nhân viên 2", "AQAAAAIAAYagAAAAEDm9cvhRbwAN44an9Ogz35rjPcOEqQq76vSLJls/HZP5YkEkrAy+t9k444Ej23rVxQ==", 1, "staff02" }
+                    { 1, "Admin System", "AQAAAAIAAYagAAAAEBa6aupv4lGxC69WV6mB5NkcJFKgCPZr0U+J7a3JoMkbwSJm+C7VNJSBXd5FG6BsOQ==", 0, "admin01" },
+                    { 2, "Nhân viên 1", "AQAAAAIAAYagAAAAENvlRwklpWLmL8igsIA4zBzggLlqkK4bGBGNEl5EzidLdh7BkPCff8lfw1xjBkuMQQ==", 1, "staff01" },
+                    { 3, "Nhân viên 2", "AQAAAAIAAYagAAAAEH1Nol+5kVJAd4wkvbrhmbeILS/mmJjlP71Ur+e1WbqyTgB1U6//5ZbN1NdhBC+H1w==", 1, "staff02" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ImportReceipts",
+                columns: new[] { "Id", "ImportDate", "Status", "SupplierId", "TotalAmount", "UserId" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2025, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1, 500000m, 1 },
+                    { 2, new DateTime(2025, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 2, 300000m, 2 },
+                    { 3, new DateTime(2025, 1, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, 7, 450000m, 3 },
+                    { 4, new DateTime(2025, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 5, 220000m, 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -332,6 +402,21 @@ namespace WebBanHang.Migrations
                     { 8, 9, "English Grammar", 70000m, 3 },
                     { 9, 6, "Tư Duy Nhanh Và Chậm", 130000m, 6 },
                     { 10, 10, "Lập Trình C#", 160000m, 7 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ImportReceiptItems",
+                columns: new[] { "Id", "ImportReceiptId", "ProductId", "Quantity", "UnitCost" },
+                values: new object[,]
+                {
+                    { 1, 1, 2, 10, 30000m },
+                    { 2, 1, 1, 5, 20000m },
+                    { 3, 2, 6, 5, 50000m },
+                    { 4, 2, 4, 3, 50000m },
+                    { 5, 3, 7, 3, 100000m },
+                    { 6, 3, 10, 2, 75000m },
+                    { 7, 4, 3, 2, 100000m },
+                    { 8, 4, 5, 1, 20000m }
                 });
 
             migrationBuilder.InsertData(
@@ -367,6 +452,26 @@ namespace WebBanHang.Migrations
                     { 9, 6, 9, 1, 130000m },
                     { 10, 7, 10, 1, 160000m }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ImportReceiptItems_ImportReceiptId",
+                table: "ImportReceiptItems",
+                column: "ImportReceiptId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ImportReceiptItems_ProductId",
+                table: "ImportReceiptItems",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ImportReceipts_SupplierId",
+                table: "ImportReceipts",
+                column: "SupplierId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ImportReceipts_UserId",
+                table: "ImportReceipts",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Inventories_ProductId",
@@ -414,10 +519,16 @@ namespace WebBanHang.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "ImportReceiptItems");
+
+            migrationBuilder.DropTable(
                 name: "Inventories");
 
             migrationBuilder.DropTable(
                 name: "OrderItems");
+
+            migrationBuilder.DropTable(
+                name: "ImportReceipts");
 
             migrationBuilder.DropTable(
                 name: "Orders");

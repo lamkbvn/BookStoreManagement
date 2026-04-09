@@ -1,10 +1,9 @@
-iusing AutoMapper;
+using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 using WebBanHang.Common.Exceptions;
 using WebBanHang.DbContextConfig;
-using WebBanHang.Repository.Interface;
 
 namespace WebBanHang.Features.CategoryFeatures.Commands.UpdateCategory
 {

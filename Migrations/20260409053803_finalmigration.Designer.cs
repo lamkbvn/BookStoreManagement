@@ -12,8 +12,8 @@ using WebBanHang.DbContextConfig;
 namespace WebBanHang.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260321012327_firstMigration")]
-    partial class firstMigration
+    [Migration("20260409053803_finalmigration")]
+    partial class finalmigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -226,6 +226,171 @@ namespace WebBanHang.Migrations
                             Email = "dangthik@gmail.com",
                             Name = "Đặng Thị K",
                             Phone = "0901000010"
+                        });
+                });
+
+            modelBuilder.Entity("WebBanHang.Entity.ImportReceipt", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("ImportDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SupplierId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SupplierId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ImportReceipts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ImportDate = new DateTime(2025, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 1,
+                            SupplierId = 1,
+                            TotalAmount = 500000m,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ImportDate = new DateTime(2025, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 1,
+                            SupplierId = 2,
+                            TotalAmount = 300000m,
+                            UserId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ImportDate = new DateTime(2025, 1, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 0,
+                            SupplierId = 7,
+                            TotalAmount = 450000m,
+                            UserId = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ImportDate = new DateTime(2025, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 1,
+                            SupplierId = 5,
+                            TotalAmount = 220000m,
+                            UserId = 1
+                        });
+                });
+
+            modelBuilder.Entity("WebBanHang.Entity.ImportReceiptItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ImportReceiptId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("UnitCost")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ImportReceiptId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ImportReceiptItems");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ImportReceiptId = 1,
+                            ProductId = 2,
+                            Quantity = 10,
+                            UnitCost = 30000m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ImportReceiptId = 1,
+                            ProductId = 1,
+                            Quantity = 5,
+                            UnitCost = 20000m
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ImportReceiptId = 2,
+                            ProductId = 6,
+                            Quantity = 5,
+                            UnitCost = 50000m
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ImportReceiptId = 2,
+                            ProductId = 4,
+                            Quantity = 3,
+                            UnitCost = 50000m
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ImportReceiptId = 3,
+                            ProductId = 7,
+                            Quantity = 3,
+                            UnitCost = 100000m
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ImportReceiptId = 3,
+                            ProductId = 10,
+                            Quantity = 2,
+                            UnitCost = 75000m
+                        },
+                        new
+                        {
+                            Id = 7,
+                            ImportReceiptId = 4,
+                            ProductId = 3,
+                            Quantity = 2,
+                            UnitCost = 100000m
+                        },
+                        new
+                        {
+                            Id = 8,
+                            ImportReceiptId = 4,
+                            ProductId = 5,
+                            Quantity = 1,
+                            UnitCost = 20000m
                         });
                 });
 
@@ -846,7 +1011,7 @@ namespace WebBanHang.Migrations
                         {
                             Id = 1,
                             Fullname = "Admin System",
-                            Password = "AQAAAAIAAYagAAAAEFckgXoO1gkDSgC1bcpyItU5Zok64eUrAVxaP5bwGLoC48UOCoZpPLEcQoaWNw+JBQ==",
+                            Password = "AQAAAAIAAYagAAAAEBa6aupv4lGxC69WV6mB5NkcJFKgCPZr0U+J7a3JoMkbwSJm+C7VNJSBXd5FG6BsOQ==",
                             Role = 0,
                             Username = "admin01"
                         },
@@ -854,7 +1019,7 @@ namespace WebBanHang.Migrations
                         {
                             Id = 2,
                             Fullname = "Nhân viên 1",
-                            Password = "AQAAAAIAAYagAAAAEO4BsSQVRxz9gR/KNbbNlL23GBqECiVI0q+uAa4UHqEQWw6uNyK4t6wHHCs8sWCT6w==",
+                            Password = "AQAAAAIAAYagAAAAENvlRwklpWLmL8igsIA4zBzggLlqkK4bGBGNEl5EzidLdh7BkPCff8lfw1xjBkuMQQ==",
                             Role = 1,
                             Username = "staff01"
                         },
@@ -862,10 +1027,48 @@ namespace WebBanHang.Migrations
                         {
                             Id = 3,
                             Fullname = "Nhân viên 2",
-                            Password = "AQAAAAIAAYagAAAAEDm9cvhRbwAN44an9Ogz35rjPcOEqQq76vSLJls/HZP5YkEkrAy+t9k444Ej23rVxQ==",
+                            Password = "AQAAAAIAAYagAAAAEH1Nol+5kVJAd4wkvbrhmbeILS/mmJjlP71Ur+e1WbqyTgB1U6//5ZbN1NdhBC+H1w==",
                             Role = 1,
                             Username = "staff02"
                         });
+                });
+
+            modelBuilder.Entity("WebBanHang.Entity.ImportReceipt", b =>
+                {
+                    b.HasOne("WebBanHang.Entity.Supplier", "Supplier")
+                        .WithMany()
+                        .HasForeignKey("SupplierId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebBanHang.Entity.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Supplier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("WebBanHang.Entity.ImportReceiptItem", b =>
+                {
+                    b.HasOne("WebBanHang.Entity.ImportReceipt", "ImportReceipt")
+                        .WithMany("ReceiptItems")
+                        .HasForeignKey("ImportReceiptId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebBanHang.Entity.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ImportReceipt");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("WebBanHang.Entity.Inventory", b =>
@@ -950,6 +1153,11 @@ namespace WebBanHang.Migrations
             modelBuilder.Entity("WebBanHang.Entity.Customer", b =>
                 {
                     b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("WebBanHang.Entity.ImportReceipt", b =>
+                {
+                    b.Navigation("ReceiptItems");
                 });
 
             modelBuilder.Entity("WebBanHang.Entity.Order", b =>
