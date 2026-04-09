@@ -23,6 +23,7 @@ Trước khi chạy project, cần bật Redis:
 
 ```bash
 docker run -d -p 6379:6379 redis
+docker exec -it redis-cache redis-cli ( keys * ) xem key đã lưu
 ```
 
 ---
