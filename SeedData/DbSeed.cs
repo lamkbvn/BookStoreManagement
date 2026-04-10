@@ -55,16 +55,68 @@ public static class DbSeed
 
         // ===== INVENTORY =====
         modelBuilder.Entity<Inventory>().HasData(
+            // Lưu ý: hệ thống hiện cộng tồn kho ngay khi tạo phiếu nhập.
+            // Vì vậy tồn kho seed bên dưới đã bao gồm các dòng hàng của phiếu nhập seed ở phần sau.
             new Inventory { Id = 1, ProductId = 1, Quantity = 100 },
-            new Inventory { Id = 2, ProductId = 2, Quantity = 80 },
-            new Inventory { Id = 3, ProductId = 3, Quantity = 60 },
+            new Inventory { Id = 2, ProductId = 2, Quantity = 130 },
+            new Inventory { Id = 3, ProductId = 3, Quantity = 80 },
             new Inventory { Id = 4, ProductId = 4, Quantity = 70 },
             new Inventory { Id = 5, ProductId = 5, Quantity = 90 },
             new Inventory { Id = 6, ProductId = 6, Quantity = 50 },
             new Inventory { Id = 7, ProductId = 7, Quantity = 40 },
             new Inventory { Id = 8, ProductId = 8, Quantity = 100 },
-            new Inventory { Id = 9, ProductId = 9, Quantity = 65 },
+            new Inventory { Id = 9, ProductId = 9, Quantity = 70 },
             new Inventory { Id = 10, ProductId = 10, Quantity = 30 }
+        );
+
+        // ===== IMPORT RECEIPT =====
+        modelBuilder.Entity<ImportReceipt>().HasData(
+            new ImportReceipt
+            {
+                Id = 1,
+                SupplierId = 6, // NXB Thế Giới
+                UserId = 1,     // admin01
+                ImportDate = new DateTime(2026, 3, 1, 9, 0, 0),
+                Status = ImportReceiptStatus.Approved,
+                TotalAmount = 20 * 100000m + 5 * 120000m
+            },
+            new ImportReceipt
+            {
+                Id = 2,
+                SupplierId = 1, // NXB Trẻ
+                UserId = 2,     // staff01
+                ImportDate = new DateTime(2026, 3, 5, 14, 30, 0),
+                Status = ImportReceiptStatus.Pending,
+                TotalAmount = 50 * 75000m
+            }
+        );
+
+        // ===== IMPORT RECEIPT ITEM =====
+        modelBuilder.Entity<ImportReceiptItem>().HasData(
+            new ImportReceiptItem
+            {
+                Id = 1,
+                ImportReceiptId = 1,
+                ProductId = 3, // Sapiens (SupplierId=6)
+                Quantity = 20,
+                UnitCost = 100000m
+            },
+            new ImportReceiptItem
+            {
+                Id = 2,
+                ImportReceiptId = 1,
+                ProductId = 9, // Tư Duy Nhanh Và Chậm (SupplierId=6)
+                Quantity = 5,
+                UnitCost = 120000m
+            },
+            new ImportReceiptItem
+            {
+                Id = 3,
+                ImportReceiptId = 2,
+                ProductId = 2, // Nhà Giả Kim (SupplierId=1)
+                Quantity = 50,
+                UnitCost = 75000m
+            }
         );
 
         // ===== CUSTOMER =====

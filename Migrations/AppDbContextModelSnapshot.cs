@@ -237,6 +237,9 @@ namespace WebBanHang.Migrations
                     b.Property<DateTime>("ImportDate")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
                     b.Property<int>("SupplierId")
                         .HasColumnType("int");
 
@@ -901,7 +904,7 @@ namespace WebBanHang.Migrations
                         {
                             Id = 1,
                             Fullname = "Admin System",
-                            Password = "AQAAAAIAAYagAAAAEBVPM2afYP5PxQujYrKVXp7nLbD+2Y84VT1coeWLEVIf3uJf4RE7G6bUmHLgtMiPDw==",
+                            Password = "AQAAAAIAAYagAAAAEKiu9yYKdOZ/GZyRUju3MIdxjBxWEZbZB9pa02sjJNzkU+StjeCBsP0tKD3rpgAt3A==",
                             Role = 0,
                             Username = "admin01"
                         },
@@ -909,7 +912,7 @@ namespace WebBanHang.Migrations
                         {
                             Id = 2,
                             Fullname = "Nhân viên 1",
-                            Password = "AQAAAAIAAYagAAAAEDPxzr/wzE3PhsjwuYT1NpUKoxxaP6n8ivkcsorrOxK34nOXUvql79S4XPf5fToAxg==",
+                            Password = "AQAAAAIAAYagAAAAEK510YyGEjGIaxf/vypoaiw9C5rCeLYTq5xn/lcTLI7p/lHi8DUWi9xiHjzty3Zp9g==",
                             Role = 1,
                             Username = "staff01"
                         },
@@ -917,7 +920,7 @@ namespace WebBanHang.Migrations
                         {
                             Id = 3,
                             Fullname = "Nhân viên 2",
-                            Password = "AQAAAAIAAYagAAAAEBl0DGTeCao9JdbRFmkIYYi0CesHzuM8lsMu96EvIzS1XIXYAB+WLNPd/QWTn0vPiQ==",
+                            Password = "AQAAAAIAAYagAAAAEN5GnEIAKvANGi3uT8q/U08rAGwtPa8nSO/f2fAqb99q7wfD909WJN4fKTB+DJ0dgA==",
                             Role = 1,
                             Username = "staff02"
                         });

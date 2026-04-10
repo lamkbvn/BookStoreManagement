@@ -29,9 +29,7 @@ namespace WebBanHang.Features.ImportReceiptFeatures.Commands.CreateImportReceipt
             RuleForEach(x => x.ReceiptItems)
                 .SetValidator(new CreateImportReceiptItemValidator(_importReceiptRepository));
 
-            RuleFor(x => x)
-                .MustAsync(ProductsBelongToSupplierAsync)
-                .WithMessage("One or more products do not belong to the selected supplier");
+            RuleFor(x => x).CustomAsync(ValidateProductsBelongToSupplierAsync);
         }
 
         private async Task<bool> SupplierExistsAsync(int supplierId, CancellationToken cancellationToken)
@@ -49,16 +47,21 @@ namespace WebBanHang.Features.ImportReceiptFeatures.Commands.CreateImportReceipt
             return items.Select(x => x.ProductId).Distinct().Count() == items.Count;
         }
 
-        private async Task<bool> ProductsBelongToSupplierAsync(CreateImportReceiptCommand command, CancellationToken cancellationToken)
+        private async Task ValidateProductsBelongToSupplierAsync(
+            CreateImportReceiptCommand command,
+            ValidationContext<CreateImportReceiptCommand> context,
+            CancellationToken cancellationToken)
         {
-            foreach (var item in command.ReceiptItems)
+            for (var i = 0; i < command.ReceiptItems.Count; i++)
             {
+                var item = command.ReceiptItems[i];
                 var belongs = await _importReceiptRepository.IsProductOfSupplierAsync(item.ProductId, command.SupplierId);
-                if (!belongs)
-                    return false;
-            }
+                if (belongs) continue;
 
-            return true;
+                context.AddFailure(
+                    $"ReceiptItems[{i}].ProductId",
+                    $"ProductId {item.ProductId} không thuộc SupplierId {command.SupplierId}");
+            }
         }
     }
 

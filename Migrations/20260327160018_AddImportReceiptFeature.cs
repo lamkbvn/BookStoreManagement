@@ -71,28 +71,6 @@ namespace WebBanHang.Migrations
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
-            migrationBuilder.InsertData(
-                table: "ImportReceipts",
-                columns: new[] { "Id", "ImportDate", "Status", "SupplierId", "TotalAmount", "UserId" },
-                values: new object[,]
-                {
-                    { 1, new DateTime(2025, 1, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 6, 3300000m, 2 },
-                    { 2, new DateTime(2025, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 7, 2240000m, 1 },
-                    { 3, new DateTime(2025, 1, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 2, 1050000m, 3 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "ImportReceiptItems",
-                columns: new[] { "Id", "ImportReceiptId", "ProductId", "Quantity", "UnitCost" },
-                values: new object[,]
-                {
-                    { 1, 1, 3, 20, 90000m },
-                    { 2, 1, 9, 15, 100000m },
-                    { 3, 2, 7, 10, 120000m },
-                    { 4, 2, 10, 8, 130000m },
-                    { 5, 3, 1, 30, 35000m }
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_ImportReceiptItems_ImportReceiptId",
                 table: "ImportReceiptItems",

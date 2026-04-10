@@ -48,15 +48,23 @@ public class ExceptionMiddleware
         catch (DbUpdateException ex)
         {
             context.Response.StatusCode = StatusCodes.Status409Conflict;
+            context.Response.ContentType = "application/json";
 
-            var response = new ApiResponse<string>
+            // Thông tin chi tiết từ DB provider (MySQL/SQL Server/...)
+            // Giúp debug đúng nguyên nhân (FK, unique constraint, ...)
+            var detail = ex.InnerException?.Message ?? ex.Message;
+
+            var response = new ApiResponse<object>
             {
                 StatusCode = 409,
-                Message = "Dữ liệu đang được sử dụng, không thể xóa",
-                Data = null
+                Message = "Xung đột dữ liệu (DbUpdateException)",
+                Data = new
+                {
+                    Detail = detail
+                }
             };
 
-            await context.Response.WriteAsJsonAsync(response);
+            await context.Response.WriteAsync(JsonSerializer.Serialize(response));
         }
         // Bắt tất cả lỗi còn lại (null reference, bug, lỗi hệ thống...)
         catch (Exception)
