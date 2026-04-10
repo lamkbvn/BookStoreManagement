@@ -1,6 +1,8 @@
 using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Distributed;
+using WebBanHang.Common.Exceptions;
 using WebBanHang.Repository.Interface;
 
 namespace WebBanHang.Features.PromotionFeatures.Commands.UpdatePromotion
@@ -27,17 +29,19 @@ namespace WebBanHang.Features.PromotionFeatures.Commands.UpdatePromotion
             UpdatePromotionCommand request,
             CancellationToken cancellationToken)
         {
+            var isUsedInOrders = await _promotionRepository.IsUsedInAnyOrderAsync(request.Id);
+            if (isUsedInOrders)
+                throw new AppException("Khong the sua promotion da duoc ap dung cho don hang", StatusCodes.Status400BadRequest);
+
             var promotion = await _promotionRepository.GetByIdAsync(request.Id);
             if (promotion == null)
-                throw new InvalidOperationException($"Promotion with id {request.Id} not found");
+                throw new AppException($"Promotion with id {request.Id} not found", StatusCodes.Status404NotFound);
 
-            promotion.Code = request.Code;
             promotion.Description = request.Description;
             promotion.DiscountPercentage = request.DiscountPercentage;
             promotion.MaximumDiscountAmount = request.MaximumDiscountAmount;
             promotion.StartDate = request.StartDate;
             promotion.EndDate = request.EndDate;
-            promotion.IsActive = request.IsActive;
 
             var updatedPromotion = await _promotionRepository.UpdateAsync(promotion);
 

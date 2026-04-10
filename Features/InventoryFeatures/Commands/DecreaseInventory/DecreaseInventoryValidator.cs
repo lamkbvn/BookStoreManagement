@@ -20,10 +20,6 @@ namespace WebBanHang.Features.InventoryFeatures.Commands.DecreaseInventory
                 .NotEmpty().WithMessage("Quantity is required")
                 .GreaterThan(0).WithMessage("Quantity must be greater than 0")
                 .LessThanOrEqualTo(10000).WithMessage("Quantity must not exceed 10000");
-
-            RuleFor(x => x)
-                .MustAsync(HaveSufficientQuantityAsync)
-                .WithMessage("Hết hàng");
         }
 
         private async Task<bool> InventoryExistsAsync(int id, CancellationToken cancellationToken)
@@ -31,12 +27,5 @@ namespace WebBanHang.Features.InventoryFeatures.Commands.DecreaseInventory
             return await _inventoryRepository.ExistsByIdAsync(id);
         }
 
-        private async Task<bool> HaveSufficientQuantityAsync(
-            DecreaseInventoryCommand command,
-            CancellationToken cancellationToken)
-        {
-            var inventory = await _inventoryRepository.GetByIdAsync(command.Id);
-            return inventory != null && inventory.Quantity >= command.Quantity;
-        }
     }
 }

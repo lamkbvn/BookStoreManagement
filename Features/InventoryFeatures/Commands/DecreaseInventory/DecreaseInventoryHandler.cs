@@ -29,7 +29,7 @@ namespace WebBanHang.Features.InventoryFeatures.Commands.DecreaseInventory
                 throw new AppException($"Inventory with id {request.Id} not found", StatusCodes.Status404NotFound);
 
             if (inventory.Quantity < request.Quantity)
-                throw new AppException("Hết hàng", StatusCodes.Status400BadRequest);
+                throw new AppException($"Sản phẩm '{inventory.Product.Name}' đã hết hàng", StatusCodes.Status400BadRequest);
 
             inventory.Quantity -= request.Quantity;
             await _inventoryRepository.UpdateAsync(inventory);
