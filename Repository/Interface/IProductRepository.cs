@@ -4,7 +4,7 @@ namespace WebBanHang.Repository.Interface
 {
     public interface IProductRepository
     {
-        Task<Product> AddAsync(Product product, int initialQuantity);
+        Task<Product> AddAsync(Product product);
         Task<List<Product>> GetAllAsync();
         Task<Product?> GetByIdAsync(int id);
         Task<Product?> GetTrackedByIdAsync(int id);

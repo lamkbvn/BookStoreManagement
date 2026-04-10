@@ -19,9 +19,6 @@ namespace WebBanHang.Features.ProductFeatures.Commands.CreateProduct
             RuleFor(x => x.Price)
                 .GreaterThan(0).WithMessage("Price must be greater than 0");
 
-            RuleFor(x => x.Quantity)
-                .GreaterThanOrEqualTo(0).WithMessage("Quantity must be >= 0");
-
             RuleFor(x => x.CategoryId)
                 .GreaterThan(0).WithMessage("CategoryId must be greater than 0")
                 .MustAsync(CategoryExists).WithMessage("Category not found");

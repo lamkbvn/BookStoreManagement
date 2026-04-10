@@ -23,7 +23,7 @@ namespace WebBanHang.Features.ProductFeatures.Commands.CreateProduct
         public async Task<CreateProductResult> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
             var product = _mapper.Map<Product>(request);
-            var created = await _productRepository.AddAsync(product, request.Quantity);
+            var created = await _productRepository.AddAsync(product);
 
             // load back with inventory for mapping quantity
             var full = await _productRepository.GetByIdAsync(created.Id) ?? created;
