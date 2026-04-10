@@ -12,7 +12,7 @@ using WebBanHang.DbContextConfig;
 namespace WebBanHang.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260410145220_init")]
+    [Migration("20260410150029_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -1011,7 +1011,7 @@ namespace WebBanHang.Migrations
                         {
                             Id = 1,
                             Fullname = "Admin System",
-                            Password = "AQAAAAIAAYagAAAAEMVnVx2ReivGfWTDoQSUSy8ig2nIs3P2RdlkNJZW9tp32xdBWeKFDn7fydAExp0GEA==",
+                            Password = "AQAAAAIAAYagAAAAEECfsZS3deQXSJ0Jq3+fD9QUlByOEho0hUSoICd5/C5mcsLsmpFOVJEKfbBd4i9dfQ==",
                             Role = 0,
                             Username = "admin01"
                         },
@@ -1019,7 +1019,7 @@ namespace WebBanHang.Migrations
                         {
                             Id = 2,
                             Fullname = "Nhân viên 1",
-                            Password = "AQAAAAIAAYagAAAAEIDV7CbFPzkmFTzMVLGZbAANY4wK8uYnwmYgLaTSPvOiVVYfNID/3eOOkoPOJmtWRg==",
+                            Password = "AQAAAAIAAYagAAAAEPTUSPeEs3yzyKlu0SK9i2pwNchAOSxY49m54S26HZGsedUuaeE+yNGafoaNR75yyA==",
                             Role = 1,
                             Username = "staff01"
                         },
@@ -1027,7 +1027,7 @@ namespace WebBanHang.Migrations
                         {
                             Id = 3,
                             Fullname = "Nhân viên 2",
-                            Password = "AQAAAAIAAYagAAAAEDjyF0Il0lLSmaI4H4SQSUOPv24TtoqMGQRpAsAIh56GsItQFfozObOC1XY6iDA9QQ==",
+                            Password = "AQAAAAIAAYagAAAAEL0tJ0QHBF3yHv5vYMSLt8QCYt+s4ARae7UuHlanUhV45HtIFnncEF0JtiPQih6QQA==",
                             Role = 1,
                             Username = "staff02"
                         });
