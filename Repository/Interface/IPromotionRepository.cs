@@ -8,6 +8,8 @@ namespace WebBanHang.Repository.Interface
         Task<List<Promotion>> GetAllAsync();
         Task<Promotion?> GetByIdAsync(int id);
         Task<bool> ExistsByIdAsync(int id);
+        Task<bool> ExistsByCodeAsync(string code);
+        Task<bool> ExistsByCodeExceptIdAsync(string code, int id);
         Task<Promotion> UpdateAsync(Promotion promotion);
         Task DeleteAsync(Promotion promotion);
     }

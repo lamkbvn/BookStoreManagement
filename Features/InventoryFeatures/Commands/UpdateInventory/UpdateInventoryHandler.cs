@@ -1,5 +1,7 @@
 using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Http;
+using WebBanHang.Common.Exceptions;
 using WebBanHang.Repository.Interface;
 
 namespace WebBanHang.Features.InventoryFeatures.Commands.UpdateInventory
@@ -24,12 +26,16 @@ namespace WebBanHang.Features.InventoryFeatures.Commands.UpdateInventory
         {
             var inventory = await _inventoryRepository.GetByIdAsync(request.Id);
             if (inventory == null)
-                throw new InvalidOperationException($"Inventory with id {request.Id} not found");
+                throw new AppException($"Inventory with id {request.Id} not found", StatusCodes.Status404NotFound);
 
             inventory.Quantity = request.Quantity;
-            var updatedInventory = await _inventoryRepository.UpdateAsync(inventory);
-            
-            return _mapper.Map<UpdateInventoryResult>(updatedInventory);
+            await _inventoryRepository.UpdateAsync(inventory);
+
+            var result = await _inventoryRepository.GetByIdAsync(request.Id);
+            if (result == null)
+                throw new AppException("Failed to load inventory after update", StatusCodes.Status500InternalServerError);
+
+            return _mapper.Map<UpdateInventoryResult>(result);
         }
     }
 }

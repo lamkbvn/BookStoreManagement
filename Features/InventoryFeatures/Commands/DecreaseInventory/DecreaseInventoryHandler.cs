@@ -1,5 +1,7 @@
 using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Http;
+using WebBanHang.Common.Exceptions;
 using WebBanHang.Repository.Interface;
 
 namespace WebBanHang.Features.InventoryFeatures.Commands.DecreaseInventory
@@ -24,15 +26,19 @@ namespace WebBanHang.Features.InventoryFeatures.Commands.DecreaseInventory
         {
             var inventory = await _inventoryRepository.GetByIdAsync(request.Id);
             if (inventory == null)
-                throw new InvalidOperationException($"Inventory with id {request.Id} not found");
+                throw new AppException($"Inventory with id {request.Id} not found", StatusCodes.Status404NotFound);
 
             if (inventory.Quantity < request.Quantity)
-                throw new InvalidOperationException($"Insufficient inventory quantity. Current: {inventory.Quantity}, Requested: {request.Quantity}");
+                throw new AppException("Hết hàng", StatusCodes.Status400BadRequest);
 
             inventory.Quantity -= request.Quantity;
-            var updatedInventory = await _inventoryRepository.UpdateAsync(inventory);
-            
-            return _mapper.Map<DecreaseInventoryResult>(updatedInventory);
+            await _inventoryRepository.UpdateAsync(inventory);
+
+            var result = await _inventoryRepository.GetByIdAsync(request.Id);
+            if (result == null)
+                throw new AppException("Failed to load inventory after decrease", StatusCodes.Status500InternalServerError);
+
+            return _mapper.Map<DecreaseInventoryResult>(result);
         }
     }
 }

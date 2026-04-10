@@ -23,7 +23,7 @@ namespace WebBanHang.Features.InventoryFeatures.Commands.DecreaseInventory
 
             RuleFor(x => x)
                 .MustAsync(HaveSufficientQuantityAsync)
-                .WithMessage("Insufficient inventory quantity");
+                .WithMessage("Hết hàng");
         }
 
         private async Task<bool> InventoryExistsAsync(int id, CancellationToken cancellationToken)

@@ -1008,7 +1008,7 @@ namespace WebBanHang.Migrations
                         {
                             Id = 1,
                             Fullname = "Admin System",
-                            Password = "AQAAAAIAAYagAAAAEBVPM2afYP5PxQujYrKVXp7nLbD+2Y84VT1coeWLEVIf3uJf4RE7G6bUmHLgtMiPDw==",
+                            Password = "AQAAAAIAAYagAAAAEBa6aupv4lGxC69WV6mB5NkcJFKgCPZr0U+J7a3JoMkbwSJm+C7VNJSBXd5FG6BsOQ==",
                             Role = 0,
                             Username = "admin01"
                         },
@@ -1016,7 +1016,7 @@ namespace WebBanHang.Migrations
                         {
                             Id = 2,
                             Fullname = "Nhân viên 1",
-                            Password = "AQAAAAIAAYagAAAAEDPxzr/wzE3PhsjwuYT1NpUKoxxaP6n8ivkcsorrOxK34nOXUvql79S4XPf5fToAxg==",
+                            Password = "AQAAAAIAAYagAAAAENvlRwklpWLmL8igsIA4zBzggLlqkK4bGBGNEl5EzidLdh7BkPCff8lfw1xjBkuMQQ==",
                             Role = 1,
                             Username = "staff01"
                         },
@@ -1024,7 +1024,7 @@ namespace WebBanHang.Migrations
                         {
                             Id = 3,
                             Fullname = "Nhân viên 2",
-                            Password = "AQAAAAIAAYagAAAAEBl0DGTeCao9JdbRFmkIYYi0CesHzuM8lsMu96EvIzS1XIXYAB+WLNPd/QWTn0vPiQ==",
+                            Password = "AQAAAAIAAYagAAAAEH1Nol+5kVJAd4wkvbrhmbeILS/mmJjlP71Ur+e1WbqyTgB1U6//5ZbN1NdhBC+H1w==",
                             Role = 1,
                             Username = "staff02"
                         });

@@ -1,4 +1,6 @@
 using MediatR;
+using Microsoft.AspNetCore.Http;
+using WebBanHang.Common.Exceptions;
 using WebBanHang.Repository.Interface;
 
 namespace WebBanHang.Features.InventoryFeatures.Commands.DeleteInventory
@@ -19,7 +21,7 @@ namespace WebBanHang.Features.InventoryFeatures.Commands.DeleteInventory
         {
             var inventory = await _inventoryRepository.GetByIdAsync(request.Id);
             if (inventory == null)
-                throw new InvalidOperationException($"Inventory with id {request.Id} not found");
+                throw new AppException($"Inventory with id {request.Id} not found", StatusCodes.Status404NotFound);
 
             await _inventoryRepository.DeleteAsync(inventory);
             return Unit.Value;
