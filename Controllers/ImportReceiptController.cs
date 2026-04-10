@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebBanHang.Common.Extensions;
 using WebBanHang.Features.ImportReceiptFeatures.Commands.ApproveImportReceipt;
@@ -22,6 +23,8 @@ public class ImportReceiptController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize(Roles = "Admin,Staff")]
+
     public async Task<IActionResult> GetAll()
     {
         var result = await _mediator.Send(new GetImportReceiptsQuery());
@@ -29,6 +32,8 @@ public class ImportReceiptController : ControllerBase
     }
 
     [HttpGet("{id:int}")]
+    [Authorize(Roles = "Admin,Staff")]
+
     public async Task<IActionResult> GetById(int id)
     {
         var result = await _mediator.Send(new GetImportReceiptByIdQuery { Id = id });
@@ -36,6 +41,7 @@ public class ImportReceiptController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "Admin,Staff")]
     public async Task<IActionResult> Create(CreateImportReceiptCommand command)
     {
         var result = await _mediator.Send(command);
@@ -43,6 +49,7 @@ public class ImportReceiptController : ControllerBase
     }
 
     [HttpPut("{id:int}")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Update(int id, UpdateImportReceiptCommand command)
     {
         command.Id = id;
@@ -51,6 +58,7 @@ public class ImportReceiptController : ControllerBase
     }
 
     [HttpPatch("{id:int}/approve")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Approve(int id)
     {
         var result = await _mediator.Send(new ApproveImportReceiptCommand { Id = id });
@@ -58,6 +66,7 @@ public class ImportReceiptController : ControllerBase
     }
 
     [HttpDelete("{id:int}")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Delete(int id)
     {
         var result = await _mediator.Send(new DeleteImportReceiptCommand { Id = id });

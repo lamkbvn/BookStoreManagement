@@ -2,6 +2,6 @@
 {
     public class LoginResult
     {
-        public string accesstoken { get; set; }
+        public string? accesstoken { get; set; }
     }
 }

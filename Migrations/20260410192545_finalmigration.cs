@@ -133,13 +133,13 @@ namespace WebBanHang.Migrations
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Products_Suppliers_SupplierId",
                         column: x => x.SupplierId,
                         principalTable: "Suppliers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -163,13 +163,13 @@ namespace WebBanHang.Migrations
                         column: x => x.SupplierId,
                         principalTable: "Suppliers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_ImportReceipts_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -195,18 +195,19 @@ namespace WebBanHang.Migrations
                         column: x => x.CustomerId,
                         principalTable: "Customers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Orders_Promotions_PromotionId",
                         column: x => x.PromotionId,
                         principalTable: "Promotions",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Orders_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -227,7 +228,7 @@ namespace WebBanHang.Migrations
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -250,13 +251,13 @@ namespace WebBanHang.Migrations
                         column: x => x.ImportReceiptId,
                         principalTable: "ImportReceipts",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_ImportReceiptItems_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -279,13 +280,13 @@ namespace WebBanHang.Migrations
                         column: x => x.OrderId,
                         principalTable: "Orders",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_OrderItems_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -357,9 +358,9 @@ namespace WebBanHang.Migrations
                 columns: new[] { "Id", "Fullname", "Password", "Role", "Username" },
                 values: new object[,]
                 {
-                    { 1, "Admin System", "AQAAAAIAAYagAAAAEHb6DB1QKoPc/j1O64rRzyZy8CZO9VPetLuVxJnIjLRZ3YTVtOMstMIIuTB/mjHJbQ==", 0, "admin01" },
-                    { 2, "Nhân viên 1", "AQAAAAIAAYagAAAAEAf1b8wJ1dUXYlHPNyfqYanbPdVmV9ki9a/OZyHDFO0jenSlibCkD923wnC7ZovmPw==", 1, "staff01" },
-                    { 3, "Nhân viên 2", "AQAAAAIAAYagAAAAEChmnu8LGB9u0uWNbZEuzbV99fi4T2K5EcLDLSCDZ4xlpKtA2WUIPA0YvVtUBa8XlA==", 1, "staff02" }
+                    { 1, "Admin System", "AQAAAAIAAYagAAAAEDk0FDU9g7wJCeFaPmVW0q8WZnmZuDlRBDClTC+ieHcgJe+xAYU5OP80vauhNMTX+A==", 0, "admin01" },
+                    { 2, "Nhân viên 1", "AQAAAAIAAYagAAAAEHjdPSHGH8K6K/dfVQjBZ4RaAsboNKPz2vNLFucgZBQLSk4zNsXkOCzNsq9RwSrbYw==", 1, "staff01" },
+                    { 3, "Nhân viên 2", "AQAAAAIAAYagAAAAEA+hqiri/9fQhpGIFbstNQbptGcOsuyn2mUf7gRX6RHIHgNpQfE0bEvxeOiymcg9KA==", 1, "staff02" }
                 });
 
             migrationBuilder.InsertData(

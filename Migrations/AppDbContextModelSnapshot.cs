@@ -1008,7 +1008,7 @@ namespace WebBanHang.Migrations
                         {
                             Id = 1,
                             Fullname = "Admin System",
-                            Password = "AQAAAAIAAYagAAAAEHb6DB1QKoPc/j1O64rRzyZy8CZO9VPetLuVxJnIjLRZ3YTVtOMstMIIuTB/mjHJbQ==",
+                            Password = "AQAAAAIAAYagAAAAEDk0FDU9g7wJCeFaPmVW0q8WZnmZuDlRBDClTC+ieHcgJe+xAYU5OP80vauhNMTX+A==",
                             Role = 0,
                             Username = "admin01"
                         },
@@ -1016,7 +1016,7 @@ namespace WebBanHang.Migrations
                         {
                             Id = 2,
                             Fullname = "Nhân viên 1",
-                            Password = "AQAAAAIAAYagAAAAEAf1b8wJ1dUXYlHPNyfqYanbPdVmV9ki9a/OZyHDFO0jenSlibCkD923wnC7ZovmPw==",
+                            Password = "AQAAAAIAAYagAAAAEHjdPSHGH8K6K/dfVQjBZ4RaAsboNKPz2vNLFucgZBQLSk4zNsXkOCzNsq9RwSrbYw==",
                             Role = 1,
                             Username = "staff01"
                         },
@@ -1024,7 +1024,7 @@ namespace WebBanHang.Migrations
                         {
                             Id = 3,
                             Fullname = "Nhân viên 2",
-                            Password = "AQAAAAIAAYagAAAAEChmnu8LGB9u0uWNbZEuzbV99fi4T2K5EcLDLSCDZ4xlpKtA2WUIPA0YvVtUBa8XlA==",
+                            Password = "AQAAAAIAAYagAAAAEA+hqiri/9fQhpGIFbstNQbptGcOsuyn2mUf7gRX6RHIHgNpQfE0bEvxeOiymcg9KA==",
                             Role = 1,
                             Username = "staff02"
                         });
@@ -1035,13 +1035,13 @@ namespace WebBanHang.Migrations
                     b.HasOne("WebBanHang.Entity.Supplier", "Supplier")
                         .WithMany()
                         .HasForeignKey("SupplierId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("WebBanHang.Entity.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Supplier");
@@ -1054,13 +1054,13 @@ namespace WebBanHang.Migrations
                     b.HasOne("WebBanHang.Entity.ImportReceipt", "ImportReceipt")
                         .WithMany("ReceiptItems")
                         .HasForeignKey("ImportReceiptId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("WebBanHang.Entity.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("ImportReceipt");
@@ -1073,7 +1073,7 @@ namespace WebBanHang.Migrations
                     b.HasOne("WebBanHang.Entity.Product", "Product")
                         .WithOne("Inventory")
                         .HasForeignKey("WebBanHang.Entity.Inventory", "ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Product");
@@ -1084,17 +1084,18 @@ namespace WebBanHang.Migrations
                     b.HasOne("WebBanHang.Entity.Customer", "Customer")
                         .WithMany("Orders")
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("WebBanHang.Entity.Promotion", "Promotion")
                         .WithMany("Orders")
-                        .HasForeignKey("PromotionId");
+                        .HasForeignKey("PromotionId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("WebBanHang.Entity.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Customer");
@@ -1109,13 +1110,13 @@ namespace WebBanHang.Migrations
                     b.HasOne("WebBanHang.Entity.Order", "Order")
                         .WithMany("OrderItems")
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("WebBanHang.Entity.Product", "Product")
                         .WithMany("OrderItems")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Order");
@@ -1128,13 +1129,13 @@ namespace WebBanHang.Migrations
                     b.HasOne("WebBanHang.Entity.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("WebBanHang.Entity.Supplier", "Supplier")
                         .WithMany("Products")
                         .HasForeignKey("SupplierId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Category");
