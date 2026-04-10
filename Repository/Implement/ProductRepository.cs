@@ -14,7 +14,7 @@ namespace WebBanHang.Repository.Implement
             _context = context;
         }
 
-        public async Task<Product> AddAsync(Product product, int initialQuantity)
+        public async Task<Product> AddAsync(Product product)
         {
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
@@ -22,7 +22,7 @@ namespace WebBanHang.Repository.Implement
             var inventory = new Inventory
             {
                 ProductId = product.Id,
-                Quantity = initialQuantity
+                Quantity = 0
             };
 
             _context.Inventories.Add(inventory);
