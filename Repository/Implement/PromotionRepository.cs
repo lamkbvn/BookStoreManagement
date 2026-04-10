@@ -41,6 +41,18 @@ namespace WebBanHang.Repository.Implement
             return await _context.Promotions.AnyAsync(p => p.Id == id);
         }
 
+        public async Task<bool> ExistsByCodeAsync(string code)
+        {
+            var normalizedCode = code.Trim().ToLower();
+            return await _context.Promotions.AnyAsync(p => p.Code.ToLower() == normalizedCode);
+        }
+
+        public async Task<bool> ExistsByCodeExceptIdAsync(string code, int id)
+        {
+            var normalizedCode = code.Trim().ToLower();
+            return await _context.Promotions.AnyAsync(p => p.Id != id && p.Code.ToLower() == normalizedCode);
+        }
+
         public async Task<Promotion> UpdateAsync(Promotion promotion)
         {
             _context.Promotions.Update(promotion);
