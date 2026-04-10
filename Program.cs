@@ -75,10 +75,10 @@ builder.Services.AddAuthentication("Bearer")
             IssuerSigningKey = new SymmetricSecurityKey(
                 Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!)),
 
-            RoleClaimType = ClaimTypes.Role // ⭐ rất quan trọng
+            RoleClaimType = ClaimTypes.Role
         };
 
-        // ⭐ BẮT LỖI 401
+        // BẮT LỖI 401
         options.Events = new JwtBearerEvents
         {
             OnChallenge = context =>
