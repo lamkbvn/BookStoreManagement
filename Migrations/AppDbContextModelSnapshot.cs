@@ -423,13 +423,13 @@ namespace WebBanHang.Migrations
                         {
                             Id = 2,
                             ProductId = 2,
-                            Quantity = 80
+                            Quantity = 130
                         },
                         new
                         {
                             Id = 3,
                             ProductId = 3,
-                            Quantity = 60
+                            Quantity = 80
                         },
                         new
                         {
@@ -465,7 +465,7 @@ namespace WebBanHang.Migrations
                         {
                             Id = 9,
                             ProductId = 9,
-                            Quantity = 65
+                            Quantity = 70
                         },
                         new
                         {
@@ -1008,7 +1008,7 @@ namespace WebBanHang.Migrations
                         {
                             Id = 1,
                             Fullname = "Admin System",
-                            Password = "AQAAAAIAAYagAAAAEECfsZS3deQXSJ0Jq3+fD9QUlByOEho0hUSoICd5/C5mcsLsmpFOVJEKfbBd4i9dfQ==",
+                            Password = "AQAAAAIAAYagAAAAECmjOYKwo7c7fng3h3kRxIGgZtpF/dQ7dmf5ao0pDuYw+3f9uEw/1mH9YpM/nGEInA==",
                             Role = 0,
                             Username = "admin01"
                         },
@@ -1016,7 +1016,7 @@ namespace WebBanHang.Migrations
                         {
                             Id = 2,
                             Fullname = "Nhân viên 1",
-                            Password = "AQAAAAIAAYagAAAAEPTUSPeEs3yzyKlu0SK9i2pwNchAOSxY49m54S26HZGsedUuaeE+yNGafoaNR75yyA==",
+                            Password = "AQAAAAIAAYagAAAAEBqAErYvZjQHD6S4xlRSiKOzoMVszVv2Asp8RY9csr7Z0UAOdzW34HuTNTqv72oHQw==",
                             Role = 1,
                             Username = "staff01"
                         },
@@ -1024,7 +1024,7 @@ namespace WebBanHang.Migrations
                         {
                             Id = 3,
                             Fullname = "Nhân viên 2",
-                            Password = "AQAAAAIAAYagAAAAEL0tJ0QHBF3yHv5vYMSLt8QCYt+s4ARae7UuHlanUhV45HtIFnncEF0JtiPQih6QQA==",
+                            Password = "AQAAAAIAAYagAAAAEFM0JDE+B6C0BGml9Q0rv0u7jvLlVTfXofylHrkj1+imVDMce5c/cHoRN5VSR9vYxw==",
                             Role = 1,
                             Username = "staff02"
                         });
@@ -1035,13 +1035,13 @@ namespace WebBanHang.Migrations
                     b.HasOne("WebBanHang.Entity.Supplier", "Supplier")
                         .WithMany()
                         .HasForeignKey("SupplierId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("WebBanHang.Entity.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Supplier");
@@ -1054,13 +1054,13 @@ namespace WebBanHang.Migrations
                     b.HasOne("WebBanHang.Entity.ImportReceipt", "ImportReceipt")
                         .WithMany("ReceiptItems")
                         .HasForeignKey("ImportReceiptId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("WebBanHang.Entity.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("ImportReceipt");
@@ -1073,7 +1073,7 @@ namespace WebBanHang.Migrations
                     b.HasOne("WebBanHang.Entity.Product", "Product")
                         .WithOne("Inventory")
                         .HasForeignKey("WebBanHang.Entity.Inventory", "ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Product");
@@ -1084,17 +1084,18 @@ namespace WebBanHang.Migrations
                     b.HasOne("WebBanHang.Entity.Customer", "Customer")
                         .WithMany("Orders")
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("WebBanHang.Entity.Promotion", "Promotion")
                         .WithMany("Orders")
-                        .HasForeignKey("PromotionId");
+                        .HasForeignKey("PromotionId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("WebBanHang.Entity.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Customer");
@@ -1109,13 +1110,13 @@ namespace WebBanHang.Migrations
                     b.HasOne("WebBanHang.Entity.Order", "Order")
                         .WithMany("OrderItems")
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("WebBanHang.Entity.Product", "Product")
                         .WithMany("OrderItems")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Order");
@@ -1128,13 +1129,13 @@ namespace WebBanHang.Migrations
                     b.HasOne("WebBanHang.Entity.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("WebBanHang.Entity.Supplier", "Supplier")
                         .WithMany("Products")
                         .HasForeignKey("SupplierId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Category");
