@@ -256,6 +256,44 @@ namespace WebBanHang.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("ImportReceipts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ImportDate = new DateTime(2025, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 1,
+                            SupplierId = 1,
+                            TotalAmount = 500000m,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ImportDate = new DateTime(2025, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 1,
+                            SupplierId = 2,
+                            TotalAmount = 300000m,
+                            UserId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ImportDate = new DateTime(2025, 1, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 0,
+                            SupplierId = 7,
+                            TotalAmount = 450000m,
+                            UserId = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ImportDate = new DateTime(2025, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 1,
+                            SupplierId = 5,
+                            TotalAmount = 220000m,
+                            UserId = 1
+                        });
                 });
 
             modelBuilder.Entity("WebBanHang.Entity.ImportReceiptItem", b =>
@@ -285,6 +323,72 @@ namespace WebBanHang.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ImportReceiptItems");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ImportReceiptId = 1,
+                            ProductId = 2,
+                            Quantity = 10,
+                            UnitCost = 30000m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ImportReceiptId = 1,
+                            ProductId = 1,
+                            Quantity = 5,
+                            UnitCost = 20000m
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ImportReceiptId = 2,
+                            ProductId = 6,
+                            Quantity = 5,
+                            UnitCost = 50000m
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ImportReceiptId = 2,
+                            ProductId = 4,
+                            Quantity = 3,
+                            UnitCost = 50000m
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ImportReceiptId = 3,
+                            ProductId = 7,
+                            Quantity = 3,
+                            UnitCost = 100000m
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ImportReceiptId = 3,
+                            ProductId = 10,
+                            Quantity = 2,
+                            UnitCost = 75000m
+                        },
+                        new
+                        {
+                            Id = 7,
+                            ImportReceiptId = 4,
+                            ProductId = 3,
+                            Quantity = 2,
+                            UnitCost = 100000m
+                        },
+                        new
+                        {
+                            Id = 8,
+                            ImportReceiptId = 4,
+                            ProductId = 5,
+                            Quantity = 1,
+                            UnitCost = 20000m
+                        });
                 });
 
             modelBuilder.Entity("WebBanHang.Entity.Inventory", b =>
@@ -904,7 +1008,7 @@ namespace WebBanHang.Migrations
                         {
                             Id = 1,
                             Fullname = "Admin System",
-                            Password = "AQAAAAIAAYagAAAAEKiu9yYKdOZ/GZyRUju3MIdxjBxWEZbZB9pa02sjJNzkU+StjeCBsP0tKD3rpgAt3A==",
+                            Password = "AQAAAAIAAYagAAAAEBVPM2afYP5PxQujYrKVXp7nLbD+2Y84VT1coeWLEVIf3uJf4RE7G6bUmHLgtMiPDw==",
                             Role = 0,
                             Username = "admin01"
                         },
@@ -912,7 +1016,7 @@ namespace WebBanHang.Migrations
                         {
                             Id = 2,
                             Fullname = "Nhân viên 1",
-                            Password = "AQAAAAIAAYagAAAAEK510YyGEjGIaxf/vypoaiw9C5rCeLYTq5xn/lcTLI7p/lHi8DUWi9xiHjzty3Zp9g==",
+                            Password = "AQAAAAIAAYagAAAAEDPxzr/wzE3PhsjwuYT1NpUKoxxaP6n8ivkcsorrOxK34nOXUvql79S4XPf5fToAxg==",
                             Role = 1,
                             Username = "staff01"
                         },
@@ -920,7 +1024,7 @@ namespace WebBanHang.Migrations
                         {
                             Id = 3,
                             Fullname = "Nhân viên 2",
-                            Password = "AQAAAAIAAYagAAAAEN5GnEIAKvANGi3uT8q/U08rAGwtPa8nSO/f2fAqb99q7wfD909WJN4fKTB+DJ0dgA==",
+                            Password = "AQAAAAIAAYagAAAAEBl0DGTeCao9JdbRFmkIYYi0CesHzuM8lsMu96EvIzS1XIXYAB+WLNPd/QWTn0vPiQ==",
                             Role = 1,
                             Username = "staff02"
                         });

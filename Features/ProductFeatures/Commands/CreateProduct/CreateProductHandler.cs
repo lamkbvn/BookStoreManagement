@@ -1,5 +1,6 @@
 using AutoMapper;
 using MediatR;
+using Microsoft.Extensions.Caching.Distributed;
 using WebBanHang.Entity;
 using WebBanHang.Repository.Interface;
 
@@ -9,11 +10,14 @@ namespace WebBanHang.Features.ProductFeatures.Commands.CreateProduct
     {
         private readonly IProductRepository _productRepository;
         private readonly IMapper _mapper;
+        private readonly IDistributedCache _cache;
+        private const string CACHE_KEY = "all_products";
 
-        public CreateProductHandler(IProductRepository productRepository, IMapper mapper)
+        public CreateProductHandler(IProductRepository productRepository, IMapper mapper, IDistributedCache cache)
         {
             _productRepository = productRepository;
             _mapper = mapper;
+            _cache = cache;
         }
 
         public async Task<CreateProductResult> Handle(CreateProductCommand request, CancellationToken cancellationToken)
@@ -23,6 +27,10 @@ namespace WebBanHang.Features.ProductFeatures.Commands.CreateProduct
 
             // load back with inventory for mapping quantity
             var full = await _productRepository.GetByIdAsync(created.Id) ?? created;
+            
+            // Xóa cache khi tạo sản phẩm mới
+            await _cache.RemoveAsync(CACHE_KEY, cancellationToken);
+            
             return _mapper.Map<CreateProductResult>(full);
         }
     }

@@ -1,9 +1,9 @@
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Distributed;
 using WebBanHang.Common.Exceptions;
 using WebBanHang.DbContextConfig;
-using WebBanHang.Repository.Interface;
 
 namespace WebBanHang.Features.CategoryFeatures.Commands.UpdateCategory
 {
@@ -11,13 +11,17 @@ namespace WebBanHang.Features.CategoryFeatures.Commands.UpdateCategory
     {
         private readonly AppDbContext _context;
         private readonly IMapper _mapper;
+        private readonly IDistributedCache _cache;
+        private const string CACHE_KEY = "all_categories";
 
         public UpdateCategoryHandler(
             AppDbContext context,
-            IMapper mapper)
+            IMapper mapper,
+            IDistributedCache cache)
         {
             _context = context;
             _mapper = mapper;
+            _cache = cache;
         }
 
         public async Task<UpdateCategoryResult> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
@@ -33,6 +37,11 @@ namespace WebBanHang.Features.CategoryFeatures.Commands.UpdateCategory
             existing.Description = request.Description ?? "";
 
             await _context.SaveChangesAsync(cancellationToken);
+
+            // Xóa cache khi cập nhật category
+            await _cache.RemoveAsync(CACHE_KEY, cancellationToken);
+            await _cache.RemoveAsync($"category_{request.Id}", cancellationToken);
+
             return _mapper.Map<UpdateCategoryResult>(existing);
         }
     }

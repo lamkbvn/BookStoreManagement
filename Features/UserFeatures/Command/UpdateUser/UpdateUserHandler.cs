@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.Extensions.Caching.Distributed;
 using WebBanHang.Common.Exceptions;
 using WebBanHang.Repository.Interface;
 
@@ -10,13 +11,17 @@ namespace WebBanHang.Features.UserFeatures.Command.UpdateUser
         private readonly IUserRepository _userRepository;
         private readonly IPasswordService _passwordService;
         private readonly IMapper _mapper;
+        private readonly IDistributedCache _cache;
+        private const string CACHE_KEY = "all_users";
 
-        public UpdateUserHandler(IUserRepository userRepository, IPasswordService passwordService, IMapper mapper)
+        public UpdateUserHandler(IUserRepository userRepository, IPasswordService passwordService, IMapper mapper, IDistributedCache cache)
         {
             _userRepository = userRepository;
             _passwordService = passwordService;
             _mapper = mapper;
+            _cache = cache;
         }
+
         public async Task<UpdateUserResult> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
         {
             var user = await _userRepository.FindById(request.Id);
@@ -29,8 +34,11 @@ namespace WebBanHang.Features.UserFeatures.Command.UpdateUser
 
             await _userRepository.UpdateAsync(user);
 
-            return _mapper.Map<UpdateUserResult>(user);
+            // Xóa cache khi cập nhật user
+            await _cache.RemoveAsync(CACHE_KEY, cancellationToken);
+            await _cache.RemoveAsync($"user_{request.Id}", cancellationToken);
 
+            return _mapper.Map<UpdateUserResult>(user);
         }
     }
 }

@@ -410,6 +410,65 @@ public static class DbSeed
 
             new OrderItem { Id = 10, OrderId = 7, ProductId = 10, Quantity = 1, UnitPrice = 160000 }
         );
+
+
+        modelBuilder.Entity<ImportReceipt>().HasData(
+            new ImportReceipt
+            {
+                Id = 1,
+                ImportDate = new DateTime(2025, 1, 2),
+                SupplierId = 1,
+                UserId = 1,
+                TotalAmount = 500000,
+                Status = ImportReceiptStatus.Approved
+            },
+            new ImportReceipt
+            {
+                Id = 2,
+                ImportDate = new DateTime(2025, 1, 3),
+                SupplierId = 2,
+                UserId = 2,
+                TotalAmount = 300000,
+                Status = ImportReceiptStatus.Approved
+            },
+            new ImportReceipt
+            {
+                Id = 3,
+                ImportDate = new DateTime(2025, 1, 4),
+                SupplierId = 7,
+                UserId = 3,
+                TotalAmount = 450000,
+                Status = ImportReceiptStatus.Pending
+            },
+            new ImportReceipt
+            {
+                Id = 4,
+                ImportDate = new DateTime(2025, 1, 5),
+                SupplierId = 5,
+                UserId = 1,
+                TotalAmount = 220000,
+                Status = ImportReceiptStatus.Approved
+            }
+        );
+
+
+        modelBuilder.Entity<ImportReceiptItem>().HasData(
+            // Receipt 1
+            new ImportReceiptItem { Id = 1, ImportReceiptId = 1, ProductId = 2, Quantity = 10, UnitCost = 30000 },
+            new ImportReceiptItem { Id = 2, ImportReceiptId = 1, ProductId = 1, Quantity = 5, UnitCost = 20000 },
+
+            // Receipt 2
+            new ImportReceiptItem { Id = 3, ImportReceiptId = 2, ProductId = 6, Quantity = 5, UnitCost = 50000 },
+            new ImportReceiptItem { Id = 4, ImportReceiptId = 2, ProductId = 4, Quantity = 3, UnitCost = 50000 },
+
+            // Receipt 3
+            new ImportReceiptItem { Id = 5, ImportReceiptId = 3, ProductId = 7, Quantity = 3, UnitCost = 100000 },
+            new ImportReceiptItem { Id = 6, ImportReceiptId = 3, ProductId = 10, Quantity = 2, UnitCost = 75000 },
+
+            // Receipt 4
+            new ImportReceiptItem { Id = 7, ImportReceiptId = 4, ProductId = 3, Quantity = 2, UnitCost = 100000 },
+            new ImportReceiptItem { Id = 8, ImportReceiptId = 4, ProductId = 5, Quantity = 1, UnitCost = 20000 }
+        );
     }
 }
 
