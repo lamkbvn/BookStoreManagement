@@ -423,13 +423,13 @@ namespace WebBanHang.Migrations
                         {
                             Id = 2,
                             ProductId = 2,
-                            Quantity = 80
+                            Quantity = 130
                         },
                         new
                         {
                             Id = 3,
                             ProductId = 3,
-                            Quantity = 60
+                            Quantity = 80
                         },
                         new
                         {
@@ -465,7 +465,7 @@ namespace WebBanHang.Migrations
                         {
                             Id = 9,
                             ProductId = 9,
-                            Quantity = 65
+                            Quantity = 70
                         },
                         new
                         {
@@ -1008,7 +1008,7 @@ namespace WebBanHang.Migrations
                         {
                             Id = 1,
                             Fullname = "Admin System",
-                            Password = "AQAAAAIAAYagAAAAEECfsZS3deQXSJ0Jq3+fD9QUlByOEho0hUSoICd5/C5mcsLsmpFOVJEKfbBd4i9dfQ==",
+                            Password = "AQAAAAIAAYagAAAAEHb6DB1QKoPc/j1O64rRzyZy8CZO9VPetLuVxJnIjLRZ3YTVtOMstMIIuTB/mjHJbQ==",
                             Role = 0,
                             Username = "admin01"
                         },
@@ -1016,7 +1016,7 @@ namespace WebBanHang.Migrations
                         {
                             Id = 2,
                             Fullname = "Nhân viên 1",
-                            Password = "AQAAAAIAAYagAAAAEPTUSPeEs3yzyKlu0SK9i2pwNchAOSxY49m54S26HZGsedUuaeE+yNGafoaNR75yyA==",
+                            Password = "AQAAAAIAAYagAAAAEAf1b8wJ1dUXYlHPNyfqYanbPdVmV9ki9a/OZyHDFO0jenSlibCkD923wnC7ZovmPw==",
                             Role = 1,
                             Username = "staff01"
                         },
@@ -1024,7 +1024,7 @@ namespace WebBanHang.Migrations
                         {
                             Id = 3,
                             Fullname = "Nhân viên 2",
-                            Password = "AQAAAAIAAYagAAAAEL0tJ0QHBF3yHv5vYMSLt8QCYt+s4ARae7UuHlanUhV45HtIFnncEF0JtiPQih6QQA==",
+                            Password = "AQAAAAIAAYagAAAAEChmnu8LGB9u0uWNbZEuzbV99fi4T2K5EcLDLSCDZ4xlpKtA2WUIPA0YvVtUBa8XlA==",
                             Role = 1,
                             Username = "staff02"
                         });

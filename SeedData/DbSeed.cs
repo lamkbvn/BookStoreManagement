@@ -69,56 +69,6 @@ public static class DbSeed
             new Inventory { Id = 10, ProductId = 10, Quantity = 30 }
         );
 
-        // ===== IMPORT RECEIPT =====
-        modelBuilder.Entity<ImportReceipt>().HasData(
-            new ImportReceipt
-            {
-                Id = 1,
-                SupplierId = 6, // NXB Thế Giới
-                UserId = 1,     // admin01
-                ImportDate = new DateTime(2026, 3, 1, 9, 0, 0),
-                Status = ImportReceiptStatus.Approved,
-                TotalAmount = 20 * 100000m + 5 * 120000m
-            },
-            new ImportReceipt
-            {
-                Id = 2,
-                SupplierId = 1, // NXB Trẻ
-                UserId = 2,     // staff01
-                ImportDate = new DateTime(2026, 3, 5, 14, 30, 0),
-                Status = ImportReceiptStatus.Pending,
-                TotalAmount = 50 * 75000m
-            }
-        );
-
-        // ===== IMPORT RECEIPT ITEM =====
-        modelBuilder.Entity<ImportReceiptItem>().HasData(
-            new ImportReceiptItem
-            {
-                Id = 1,
-                ImportReceiptId = 1,
-                ProductId = 3, // Sapiens (SupplierId=6)
-                Quantity = 20,
-                UnitCost = 100000m
-            },
-            new ImportReceiptItem
-            {
-                Id = 2,
-                ImportReceiptId = 1,
-                ProductId = 9, // Tư Duy Nhanh Và Chậm (SupplierId=6)
-                Quantity = 5,
-                UnitCost = 120000m
-            },
-            new ImportReceiptItem
-            {
-                Id = 3,
-                ImportReceiptId = 2,
-                ProductId = 2, // Nhà Giả Kim (SupplierId=1)
-                Quantity = 50,
-                UnitCost = 75000m
-            }
-        );
-
         // ===== CUSTOMER =====
         modelBuilder.Entity<Customer>().HasData(
             new Customer

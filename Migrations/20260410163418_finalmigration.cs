@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WebBanHang.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class finalmigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -357,9 +357,9 @@ namespace WebBanHang.Migrations
                 columns: new[] { "Id", "Fullname", "Password", "Role", "Username" },
                 values: new object[,]
                 {
-                    { 1, "Admin System", "AQAAAAIAAYagAAAAEECfsZS3deQXSJ0Jq3+fD9QUlByOEho0hUSoICd5/C5mcsLsmpFOVJEKfbBd4i9dfQ==", 0, "admin01" },
-                    { 2, "Nhân viên 1", "AQAAAAIAAYagAAAAEPTUSPeEs3yzyKlu0SK9i2pwNchAOSxY49m54S26HZGsedUuaeE+yNGafoaNR75yyA==", 1, "staff01" },
-                    { 3, "Nhân viên 2", "AQAAAAIAAYagAAAAEL0tJ0QHBF3yHv5vYMSLt8QCYt+s4ARae7UuHlanUhV45HtIFnncEF0JtiPQih6QQA==", 1, "staff02" }
+                    { 1, "Admin System", "AQAAAAIAAYagAAAAEHb6DB1QKoPc/j1O64rRzyZy8CZO9VPetLuVxJnIjLRZ3YTVtOMstMIIuTB/mjHJbQ==", 0, "admin01" },
+                    { 2, "Nhân viên 1", "AQAAAAIAAYagAAAAEAf1b8wJ1dUXYlHPNyfqYanbPdVmV9ki9a/OZyHDFO0jenSlibCkD923wnC7ZovmPw==", 1, "staff01" },
+                    { 3, "Nhân viên 2", "AQAAAAIAAYagAAAAEChmnu8LGB9u0uWNbZEuzbV99fi4T2K5EcLDLSCDZ4xlpKtA2WUIPA0YvVtUBa8XlA==", 1, "staff02" }
                 });
 
             migrationBuilder.InsertData(
@@ -425,14 +425,14 @@ namespace WebBanHang.Migrations
                 values: new object[,]
                 {
                     { 1, 1, 100 },
-                    { 2, 2, 80 },
-                    { 3, 3, 60 },
+                    { 2, 2, 130 },
+                    { 3, 3, 80 },
                     { 4, 4, 70 },
                     { 5, 5, 90 },
                     { 6, 6, 50 },
                     { 7, 7, 40 },
                     { 8, 8, 100 },
-                    { 9, 9, 65 },
+                    { 9, 9, 70 },
                     { 10, 10, 30 }
                 });
 
