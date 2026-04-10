@@ -1,5 +1,4 @@
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebBanHang.Common.Extensions;
 using WebBanHang.Features.ImportReceiptFeatures.Commands.ApproveImportReceipt;
@@ -13,7 +12,6 @@ namespace WebBanHang.Controllers;
 
 [ApiController]
 [Route("api/import-receipts")]
-[Authorize(Roles = "Admin,Staff")]
 public class ImportReceiptController : ControllerBase
 {
     private readonly IMediator _mediator;
