@@ -1,23 +1,13 @@
 using FluentValidation;
-using WebBanHang.Repository.Interface;
 
 namespace WebBanHang.Features.PromotionFeatures.Commands.UpdatePromotion
 {
     public class UpdatePromotionValidator : AbstractValidator<UpdatePromotionCommand>
     {
-        private readonly IPromotionRepository _promotionRepository;
-
-        public UpdatePromotionValidator(IPromotionRepository promotionRepository)
+        public UpdatePromotionValidator()
         {
-            _promotionRepository = promotionRepository;
-
             RuleFor(x => x.Id)
                 .GreaterThan(0).WithMessage("Promotion ID must be greater than 0");
-
-            RuleFor(x => x.Code)
-                .NotEmpty().WithMessage("Promotional code is required")
-                .MaximumLength(50).WithMessage("Promotional code must not exceed 50 characters")
-                .MustAsync(BeUniqueCodeAsync).WithMessage("Promotion code already exists");
 
             RuleFor(x => x.DiscountPercentage)
                 .GreaterThan(0).WithMessage("Discount percentage must be greater than 0")
@@ -32,11 +22,6 @@ namespace WebBanHang.Features.PromotionFeatures.Commands.UpdatePromotion
             RuleFor(x => x.EndDate)
                 .NotEmpty().WithMessage("End date is required")
                 .GreaterThan(x => x.StartDate).WithMessage("End date must be after start date");
-        }
-
-        private async Task<bool> BeUniqueCodeAsync(UpdatePromotionCommand command, string code, CancellationToken cancellationToken)
-        {
-            return !await _promotionRepository.ExistsByCodeExceptIdAsync(code, command.Id);
         }
     }
 }

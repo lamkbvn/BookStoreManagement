@@ -53,6 +53,11 @@ namespace WebBanHang.Repository.Implement
             return await _context.Promotions.AnyAsync(p => p.Id != id && p.Code.ToLower() == normalizedCode);
         }
 
+        public async Task<bool> IsUsedInAnyOrderAsync(int id)
+        {
+            return await _context.Orders.AnyAsync(o => o.PromotionId == id);
+        }
+
         public async Task<Promotion> UpdateAsync(Promotion promotion)
         {
             _context.Promotions.Update(promotion);

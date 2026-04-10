@@ -10,6 +10,7 @@ namespace WebBanHang.Repository.Interface
         Task<bool> ExistsByIdAsync(int id);
         Task<bool> ExistsByCodeAsync(string code);
         Task<bool> ExistsByCodeExceptIdAsync(string code, int id);
+        Task<bool> IsUsedInAnyOrderAsync(int id);
         Task<Promotion> UpdateAsync(Promotion promotion);
         Task DeleteAsync(Promotion promotion);
     }

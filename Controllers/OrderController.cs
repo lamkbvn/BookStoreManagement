@@ -1,10 +1,10 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
+using WebBanHang.Common.Exceptions;
 using WebBanHang.Common.Extensions;
 using WebBanHang.Features.OrderFeatures.Commands.CreateOrder;
-using WebBanHang.Features.OrderFeatures.Commands.DeleteOrder;
-using WebBanHang.Features.OrderFeatures.Commands.UpdateOrder;
 using WebBanHang.Features.OrderFeatures.Queries.GetOrderById;
 using WebBanHang.Features.OrderFeatures.Queries.GetOrders;
 
@@ -37,24 +37,15 @@ public class OrderController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(CreateOrderCommand command)
+    public async Task<IActionResult> Create([FromBody] CreateOrderCommand command)
     {
+        var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (!int.TryParse(userIdClaim, out var userId) || userId <= 0)
+            throw new AppException("Token không hợp lệ", StatusCodes.Status401Unauthorized);
+
+        command.UserId = userId;
         var result = await _mediator.Send(command);
         return this.AutoResponse(result);
     }
 
-    [HttpPut("{id:int}")]
-    public async Task<IActionResult> Update(int id, UpdateOrderCommand command)
-    {
-        command.Id = id;
-        var result = await _mediator.Send(command);
-        return this.AutoResponse(result);
-    }
-
-    [HttpDelete("{id:int}")]
-    public async Task<IActionResult> Delete(int id)
-    {
-        var result = await _mediator.Send(new DeleteOrderCommand { Id = id });
-        return this.AutoResponse(result);
-    }
 }

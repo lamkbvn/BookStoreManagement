@@ -1,5 +1,7 @@
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Distributed;
+using WebBanHang.Common.Exceptions;
 using WebBanHang.Repository.Interface;
 
 namespace WebBanHang.Features.PromotionFeatures.Commands.DeletePromotion
@@ -25,11 +27,17 @@ namespace WebBanHang.Features.PromotionFeatures.Commands.DeletePromotion
         {
             var promotion = await _promotionRepository.GetByIdAsync(request.Id);
             if (promotion == null)
-                throw new InvalidOperationException($"Promotion with id {request.Id} not found");
+                throw new AppException($"Promotion with id {request.Id} not found", StatusCodes.Status404NotFound);
 
-            await _promotionRepository.DeleteAsync(promotion);
+            if (!promotion.IsActive)
+            {
+                return true;
+            }
 
-            // Xóa cache khi xóa promotion
+            promotion.IsActive = false;
+            await _promotionRepository.UpdateAsync(promotion);
+
+            // Xóa cache khi deactive promotion
             await _cache.RemoveAsync(CACHE_KEY, cancellationToken);
             await _cache.RemoveAsync($"promotion_{request.Id}", cancellationToken);
 

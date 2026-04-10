@@ -7,10 +7,14 @@ namespace WebBanHang.Features.OrderFeatures.Commands.CreateOrder
         : AbstractValidator<CreateOrderCommand>
     {
         private readonly IProductRepository _productRepository;
+        private readonly IPromotionRepository _promotionRepository;
 
-        public CreateOrderValidator(IProductRepository productRepository)
+        public CreateOrderValidator(
+            IProductRepository productRepository,
+            IPromotionRepository promotionRepository)
         {
             _productRepository = productRepository;
+            _promotionRepository = promotionRepository;
 
             RuleFor(x => x.CustomerId)
                 .NotEmpty().WithMessage("CustomerId is required")
@@ -26,6 +30,21 @@ namespace WebBanHang.Features.OrderFeatures.Commands.CreateOrder
 
             RuleForEach(x => x.OrderItems)
                 .SetValidator(new CreateOrderItemValidator(_productRepository));
+
+            RuleFor(x => x.PromotionId)
+                .MustAsync(PromotionExistsAsync)
+                .When(x => x.PromotionId.HasValue && x.PromotionId.Value > 0)
+                .WithMessage("Promotion does not exist");
+        }
+
+        private async Task<bool> PromotionExistsAsync(int? promotionId, CancellationToken cancellationToken)
+        {
+            if (!promotionId.HasValue)
+            {
+                return true;
+            }
+
+            return await _promotionRepository.ExistsByIdAsync(promotionId.Value);
         }
     }
 
@@ -44,10 +63,6 @@ namespace WebBanHang.Features.OrderFeatures.Commands.CreateOrder
                 .NotEmpty().WithMessage("Quantity is required")
                 .GreaterThan(0).WithMessage("Quantity must be greater than 0")
                 .LessThanOrEqualTo(10000).WithMessage("Quantity must not exceed 10000");
-
-            RuleFor(x => x.UnitPrice)
-                .NotEmpty().WithMessage("UnitPrice is required")
-                .GreaterThan(0).WithMessage("UnitPrice must be greater than 0");
         }
     }
 }
