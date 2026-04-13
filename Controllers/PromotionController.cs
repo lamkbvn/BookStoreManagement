@@ -12,7 +12,6 @@ namespace WebBanHang.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize(Roles = "Admin,Staff")]
     public class PromotionController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -23,6 +22,7 @@ namespace WebBanHang.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin,Staff")]
         public async Task<IActionResult> GetAllPromotions()
         {
             var result = await _mediator.Send(new GetPromotionsQuery());
@@ -30,6 +30,7 @@ namespace WebBanHang.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin,Staff")]
         public async Task<IActionResult> GetPromotionById(int id)
         {
             var result = await _mediator.Send(new GetPromotionByIdQuery { Id = id });
@@ -37,6 +38,7 @@ namespace WebBanHang.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreatePromotion([FromBody] CreatePromotionCommand command)
         {
             var result = await _mediator.Send(command);
@@ -44,6 +46,7 @@ namespace WebBanHang.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdatePromotion(int id, [FromBody] UpdatePromotionCommand command)
         {
             command.Id = id;
@@ -52,6 +55,7 @@ namespace WebBanHang.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeletePromotion(int id)
         {
             var result = await _mediator.Send(new DeletePromotionCommand { Id = id });

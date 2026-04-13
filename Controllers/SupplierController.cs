@@ -12,7 +12,6 @@ namespace WebBanHang.Controllers;
 
 [ApiController]
 [Route("api/suppliers")]
-[Authorize(Roles = "Admin,Staff")]
 public class SupplierController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -23,6 +22,7 @@ public class SupplierController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize(Roles = "Admin,Staff")]
     public async Task<IActionResult> GetAll()
     {
         var result = await _mediator.Send(new GetSuppliersQuery());
@@ -30,6 +30,7 @@ public class SupplierController : ControllerBase
     }
 
     [HttpGet("{id:int}")]
+    [Authorize(Roles = "Admin,Staff")]
     public async Task<IActionResult> GetById(int id)
     {
         var result = await _mediator.Send(new GetSupplierByIdQuery { Id = id });
@@ -37,6 +38,7 @@ public class SupplierController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Create(CreateSupplierCommand command)
     {
         var result = await _mediator.Send(command);
@@ -44,6 +46,7 @@ public class SupplierController : ControllerBase
     }
 
     [HttpPut("{id:int}")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Update(int id, UpdateSupplierCommand command)
     {
         command.Id = id;
@@ -52,6 +55,7 @@ public class SupplierController : ControllerBase
     }
 
     [HttpDelete("{id:int}")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Delete(int id)
     {
         var result = await _mediator.Send(new DeleteSupplierCommand { Id = id });

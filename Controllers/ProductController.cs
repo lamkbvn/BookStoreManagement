@@ -13,7 +13,6 @@ namespace WebBanHang.Controllers
 {
     [ApiController]
     [Route("api/products")]
-    [Authorize(Roles = "Admin,Staff")]
     public class ProductController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -24,6 +23,7 @@ namespace WebBanHang.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin,Staff")]
         public async Task<IActionResult> GetAll()
         {
             var result = await _mediator.Send(new GetProductsQuery());
@@ -31,6 +31,7 @@ namespace WebBanHang.Controllers
         }
 
         [HttpGet("{id:int}")]
+        [Authorize(Roles = "Admin,Staff")]
         public async Task<IActionResult> GetById(int id)
         {
             var result = await _mediator.Send(new GetProductByIdQuery { Id = id });
@@ -38,6 +39,7 @@ namespace WebBanHang.Controllers
         }
 
         [HttpGet("{id:int}/inventory")]
+        [Authorize(Roles = "Admin,Staff")]
         public async Task<IActionResult> GetInventoryByProductId(int id)
         {
             var result = await _mediator.Send(new GetInventoryByProductIdQuery { ProductId = id });
@@ -45,6 +47,7 @@ namespace WebBanHang.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(CreateProductCommand command)
         {
             var result = await _mediator.Send(command);
@@ -52,6 +55,7 @@ namespace WebBanHang.Controllers
         }
 
         [HttpPut("{id:int}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Update(int id, UpdateProductCommand command)
         {
             command.Id = id;
@@ -60,6 +64,7 @@ namespace WebBanHang.Controllers
         }
 
         [HttpDelete("{id:int}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _mediator.Send(new DeleteProductCommand { Id = id });

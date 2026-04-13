@@ -12,7 +12,6 @@ namespace WebBanHang.Controllers;
 
 [ApiController]
 [Route("api/categories")]
-[Authorize(Roles = "Admin,Staff")]
 public class CategoryController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -23,6 +22,8 @@ public class CategoryController : ControllerBase
     }
 
     [HttpGet]
+
+    [Authorize(Roles = "Admin,Staff")]
     public async Task<IActionResult> GetAll()
     {
         var result = await _mediator.Send(new GetCategoriesQuery());
@@ -30,6 +31,7 @@ public class CategoryController : ControllerBase
     }
 
     [HttpGet("{id:int}")]
+    [Authorize(Roles = "Admin,Staff")]
     public async Task<IActionResult> GetById(int id)
     {
         var result = await _mediator.Send(new GetCategoryByIdQuery { Id = id });
@@ -37,6 +39,7 @@ public class CategoryController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Create(CreateCategoryCommand command)
     {
         var result = await _mediator.Send(command);
@@ -44,6 +47,7 @@ public class CategoryController : ControllerBase
     }
 
     [HttpPut("{id:int}")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Update(int id, UpdateCategoryCommand command)
     {
         command.Id = id;
@@ -52,6 +56,7 @@ public class CategoryController : ControllerBase
     }
 
     [HttpDelete("{id:int}")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Delete(int id)
     {
         var result = await _mediator.Send(new DeleteCategoryCommand { Id = id });
