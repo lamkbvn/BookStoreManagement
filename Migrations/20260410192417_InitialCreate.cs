@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WebBanHang.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -358,9 +358,9 @@ namespace WebBanHang.Migrations
                 columns: new[] { "Id", "Fullname", "Password", "Role", "Username" },
                 values: new object[,]
                 {
-                    { 1, "Admin System", "AQAAAAIAAYagAAAAECmjOYKwo7c7fng3h3kRxIGgZtpF/dQ7dmf5ao0pDuYw+3f9uEw/1mH9YpM/nGEInA==", 0, "admin01" },
-                    { 2, "Nhân viên 1", "AQAAAAIAAYagAAAAEBqAErYvZjQHD6S4xlRSiKOzoMVszVv2Asp8RY9csr7Z0UAOdzW34HuTNTqv72oHQw==", 1, "staff01" },
-                    { 3, "Nhân viên 2", "AQAAAAIAAYagAAAAEFM0JDE+B6C0BGml9Q0rv0u7jvLlVTfXofylHrkj1+imVDMce5c/cHoRN5VSR9vYxw==", 1, "staff02" }
+                    { 1, "Admin System", "AQAAAAIAAYagAAAAEFu8h9TyQZS41S/EdHPvtr6SO10yDKtMn9WCeBewz3+r6jrE9B++4SS53Qj/DYO4+w==", 0, "admin01" },
+                    { 2, "Nhân viên 1", "AQAAAAIAAYagAAAAEOsYn/Lz+i8Wk0P/ab2pkdlYB5mgsJs+6A0F8f9umwECIFSghx7srHkbr3a5qDzq4Q==", 1, "staff01" },
+                    { 3, "Nhân viên 2", "AQAAAAIAAYagAAAAEFbPv7ofrxjAW1P8uRO7FEZ1SshRYHryKLFB0IO9FnNlKDJphQymaqJ1O1e4YKdTlw==", 1, "staff02" }
                 });
 
             migrationBuilder.InsertData(

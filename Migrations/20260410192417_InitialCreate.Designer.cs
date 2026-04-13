@@ -12,8 +12,8 @@ using WebBanHang.DbContextConfig;
 namespace WebBanHang.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260410191619_init")]
-    partial class init
+    [Migration("20260410192417_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1011,7 +1011,7 @@ namespace WebBanHang.Migrations
                         {
                             Id = 1,
                             Fullname = "Admin System",
-                            Password = "AQAAAAIAAYagAAAAECmjOYKwo7c7fng3h3kRxIGgZtpF/dQ7dmf5ao0pDuYw+3f9uEw/1mH9YpM/nGEInA==",
+                            Password = "AQAAAAIAAYagAAAAEFu8h9TyQZS41S/EdHPvtr6SO10yDKtMn9WCeBewz3+r6jrE9B++4SS53Qj/DYO4+w==",
                             Role = 0,
                             Username = "admin01"
                         },
@@ -1019,7 +1019,7 @@ namespace WebBanHang.Migrations
                         {
                             Id = 2,
                             Fullname = "Nhân viên 1",
-                            Password = "AQAAAAIAAYagAAAAEBqAErYvZjQHD6S4xlRSiKOzoMVszVv2Asp8RY9csr7Z0UAOdzW34HuTNTqv72oHQw==",
+                            Password = "AQAAAAIAAYagAAAAEOsYn/Lz+i8Wk0P/ab2pkdlYB5mgsJs+6A0F8f9umwECIFSghx7srHkbr3a5qDzq4Q==",
                             Role = 1,
                             Username = "staff01"
                         },
@@ -1027,7 +1027,7 @@ namespace WebBanHang.Migrations
                         {
                             Id = 3,
                             Fullname = "Nhân viên 2",
-                            Password = "AQAAAAIAAYagAAAAEFM0JDE+B6C0BGml9Q0rv0u7jvLlVTfXofylHrkj1+imVDMce5c/cHoRN5VSR9vYxw==",
+                            Password = "AQAAAAIAAYagAAAAEFbPv7ofrxjAW1P8uRO7FEZ1SshRYHryKLFB0IO9FnNlKDJphQymaqJ1O1e4YKdTlw==",
                             Role = 1,
                             Username = "staff02"
                         });

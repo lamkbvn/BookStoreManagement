@@ -17,8 +17,6 @@ namespace WebBanHang.Repository.Implement
 
         public async Task<ImportReceipt> CreateWithInventoryUpdateAsync(ImportReceipt receipt)
         {
-            await using var transaction = await _context.Database.BeginTransactionAsync();
-
             _context.ImportReceipts.Add(receipt);
 
             foreach (var item in receipt.ReceiptItems)
@@ -41,7 +39,6 @@ namespace WebBanHang.Repository.Implement
             }
 
             await _context.SaveChangesAsync();
-            await transaction.CommitAsync();
 
             return receipt;
         }
@@ -104,8 +101,6 @@ namespace WebBanHang.Repository.Implement
             ImportReceipt receipt,
             List<ImportReceiptItem> newItems)
         {
-            await using var transaction = await _context.Database.BeginTransactionAsync();
-
             foreach (var oldItem in receipt.ReceiptItems.ToList())
             {
                 var inventory = await _context.Inventories.FirstOrDefaultAsync(x => x.ProductId == oldItem.ProductId);
@@ -138,15 +133,12 @@ namespace WebBanHang.Repository.Implement
             }
 
             await _context.SaveChangesAsync();
-            await transaction.CommitAsync();
 
             return receipt;
         }
 
         public async Task DeletePendingWithInventoryRollbackAsync(ImportReceipt receipt)
         {
-            await using var transaction = await _context.Database.BeginTransactionAsync();
-
             foreach (var item in receipt.ReceiptItems)
             {
                 var inventory = await _context.Inventories.FirstOrDefaultAsync(x => x.ProductId == item.ProductId);
@@ -160,7 +152,6 @@ namespace WebBanHang.Repository.Implement
             _context.ImportReceipts.Remove(receipt);
 
             await _context.SaveChangesAsync();
-            await transaction.CommitAsync();
         }
 
         public async Task<ImportReceipt> UpdateAsync(ImportReceipt receipt)
